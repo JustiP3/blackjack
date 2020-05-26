@@ -7,3 +7,15 @@ body {
   p {
     color: red;
   }
+
+  .wrapper {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .button {
+    background-color: white;
+    width: 20%;
+    display: inline-block;
+  
+  }
