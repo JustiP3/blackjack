@@ -32,11 +32,24 @@ class Player {
     constructor(name) {
         this.name = name 
         this.currentHand = []
+        this.stats = new Statistics
     }
 }
 
 class Statistics {
+    constructor() {
+        this.wins = 0
+        this.losses = 0
+        this.bustCount = 0
+    }
 
+    postStats(player) {
+
+    }
+
+    fetchStats(player) {
+
+    }
 }
 
 class Deck {
