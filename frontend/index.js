@@ -29,7 +29,10 @@ class Game {
 }
 
 class Player {
-
+    constructor(name) {
+        this.name = name 
+        this.currentHand = []
+    }
 }
 
 class Statistics {
@@ -37,6 +40,18 @@ class Statistics {
 }
 
 class Deck {
+    dealCard(player) {
+
+    }
+
+    newRound(player1, player2) {
+
+    }
+
+    endRound(player1, player2) {
+
+    }
+
     allCards = [
         {
             value: "Ace",
