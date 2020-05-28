@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
     AppController.displayWelcome()
-    
-
-
-
 
 })
 
@@ -24,16 +20,21 @@ class AppController {
         // Event Listeners for buttons 
 
         newGameDiv.addEventListener('click', function(){
-
+            AppController.clearWrapperContent()
+            AppController.startNewGame()
         })
 
         viewStatsDiv.addEventListener('click', function() {
-
+            AppController.clearWrapperContent()
+            AppController.displayStatistics()
         })
     }
 
     static displayStatistics() {
+        // first create navigation buttons 
+        //then display statstics 
 
+        Statistics.displayStatsPage()
     }
 
     static startNewGame() {
