@@ -25,6 +25,11 @@ class AppController {
 }
 
 class Game {
+    constructor(player1, player2) {
+        this.human = player1 
+        this.computer = player2 
+        this.deck = new Deck 
+    }
 
 }
 
@@ -49,6 +54,10 @@ class Statistics {
 
     fetchStats(player) {
 
+    }
+
+    displayStatsPage() {
+        
     }
 }
 
