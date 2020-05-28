@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(){
     AppController.displayWelcome()
     
 
-    debugger 
+
 
 
 })
@@ -20,6 +20,33 @@ class AppController {
         viewStatsDiv.setAttribute('class', 'button')
         viewStatsDiv.innerText = "View Statistics"
         wrapper.appendChild(viewStatsDiv)
+
+        // Event Listeners for buttons 
+
+        newGameDiv.addEventListener('click', function(){
+
+        })
+
+        viewStatsDiv.addEventListener('click', function() {
+
+        })
+    }
+
+    static displayStatistics() {
+
+    }
+
+    static startNewGame() {
+
+    }
+
+    static clearWrapperContent() {
+        const wrapper = document.getElementsByClassName('wrapper')[0]
+        const content = wrapper.getElementsByTagName('div') 
+
+        for (let i = content.length - 1; i >=0 ; i--) {
+            content[0].parentNode.removeChild(content[0])
+        }
     }
 }
 
@@ -33,8 +60,7 @@ class Game {
 }
 
 class Player {
-    constructor(name) {
-        this.name = name 
+    constructor() {
         this.currentHand = []
         this.stats = new Statistics
     }
