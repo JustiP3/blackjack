@@ -30,15 +30,21 @@ class AppController {
         })
     }
 
-    static displayStatistics() {
-        // first create navigation buttons 
-        //then display statstics 
+    static displayStatistics() {        
+        const wrapper = document.getElementsByClassName('wrapper')[0]
+
+
+        const newGameDiv = document.createElement('div')
+        newGameDiv.setAttribute('class', 'button')
+        newGameDiv.innerText = "New Game"
+        wrapper.appendChild(newGameDiv)
 
         Statistics.displayStatsPage()
     }
 
     static startNewGame() {
-
+        //first create navigation buttons 
+        //then call game 
     }
 
     static clearWrapperContent() {
@@ -47,6 +53,57 @@ class AppController {
 
         for (let i = content.length - 1; i >=0 ; i--) {
             content[0].parentNode.removeChild(content[0])
+        }
+    }
+
+    static buildNavBar(currentScreen) { 
+        // current screens are 'home', 'game', and 'stats'
+
+        const wrapper = document.getElementsByClassName('wrapper')[0]
+        createHomeButton = function() {
+            const homeScreen = document.createElement('div')
+            homeScreen.setAttribute('class', 'button')
+            homeScreen.innerText = "Home"
+            wrapper.appendChild(homeScreen)
+
+            homeScreen.addEventListener('click', function(){
+                AppController.clearWrapperContent()
+                AppController.displayWelcome()
+            })
+        }
+        createNewGameButton = function() {
+            const newGameDiv = document.createElement('div')
+            newGameDiv.setAttribute('class', 'button')
+            newGameDiv.innerText = "New Game"
+            wrapper.appendChild(newGameDiv)
+
+            newGameDiv.addEventListener('click', function(){
+                AppController.clearWrapperContent()
+                AppController.startNewGame()
+            })
+        }
+        createStatsButton = function() {
+            const viewStatsDiv = document.createElement('div')
+            viewStatsDiv.setAttribute('class', 'button')
+            viewStatsDiv.innerText = "View Statistics"
+            wrapper.appendChild(viewStatsDiv)
+
+            viewStatsDiv.addEventListener('click', function() {
+                AppController.clearWrapperContent()
+                AppController.displayStatistics()
+            })
+        }
+
+        if (currentScreen === 'home') {
+            createNewGameButton()
+            createStatsButton()
+        } else if (currentScreen === 'game') {
+            createHomeButton()
+        } else if (currentScreen === 'stats') {
+            createHomeButton()
+            createStatsButton()
+        } else {
+            console.log("Error: current screen options are 'home', 'game', or 'stats'")
         }
     }
 }
