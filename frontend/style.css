@@ -19,3 +19,9 @@ body {
     display: inline-block;
   
   }
+
+  .mainwindow {   
+    background-color: green; 
+    display: block; 
+    margin: 10px;
+  }

@@ -110,8 +110,8 @@ class Statistics {
 
     }
 
-    fetchStats(player) {
-
+    static fetchStats() {
+        
     }
 
     static displayStatsPage() {
