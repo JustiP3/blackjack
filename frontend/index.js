@@ -5,29 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 class AppController {
     static displayWelcome() {
-        const wrapper = document.getElementsByClassName('wrapper')[0]
-        
-        const newGameDiv = document.createElement('div')
-        newGameDiv.setAttribute('class', 'button')
-        newGameDiv.innerText = "New Game"
-        wrapper.appendChild(newGameDiv)
-
-        const viewStatsDiv = document.createElement('div')
-        viewStatsDiv.setAttribute('class', 'button')
-        viewStatsDiv.innerText = "View Statistics"
-        wrapper.appendChild(viewStatsDiv)
-
-        // Event Listeners for buttons 
-
-        newGameDiv.addEventListener('click', function(){
-            AppController.clearWrapperContent()
-            AppController.startNewGame()
-        })
-
-        viewStatsDiv.addEventListener('click', function() {
-            AppController.clearWrapperContent()
-            AppController.displayStatistics()
-        })
+        this.buildNavBar('home')
     }
 
     static displayStatistics() {        
@@ -60,7 +38,7 @@ class AppController {
         // current screens are 'home', 'game', and 'stats'
 
         const wrapper = document.getElementsByClassName('wrapper')[0]
-        createHomeButton = function() {
+        const createHomeButton = function() {
             const homeScreen = document.createElement('div')
             homeScreen.setAttribute('class', 'button')
             homeScreen.innerText = "Home"
@@ -71,7 +49,7 @@ class AppController {
                 AppController.displayWelcome()
             })
         }
-        createNewGameButton = function() {
+        const createNewGameButton = function() {
             const newGameDiv = document.createElement('div')
             newGameDiv.setAttribute('class', 'button')
             newGameDiv.innerText = "New Game"
@@ -82,7 +60,7 @@ class AppController {
                 AppController.startNewGame()
             })
         }
-        createStatsButton = function() {
+        const createStatsButton = function() {
             const viewStatsDiv = document.createElement('div')
             viewStatsDiv.setAttribute('class', 'button')
             viewStatsDiv.innerText = "View Statistics"
@@ -103,7 +81,7 @@ class AppController {
             createHomeButton()
             createStatsButton()
         } else {
-            console.log("Error: current screen options are 'home', 'game', or 'stats'")
+            console.log("Error: currentScreen options are 'home', 'game', or 'stats'")
         }
     }
 }
