@@ -9,20 +9,15 @@ class AppController {
     }
 
     static displayStatistics() {        
-        const wrapper = document.getElementsByClassName('wrapper')[0]
-
-
-        const newGameDiv = document.createElement('div')
-        newGameDiv.setAttribute('class', 'button')
-        newGameDiv.innerText = "New Game"
-        wrapper.appendChild(newGameDiv)
+        this.buildNavBar('stats')
 
         Statistics.displayStatsPage()
     }
 
     static startNewGame() {
-        //first create navigation buttons 
-        //then call game 
+        this.buildNavBar('game')
+        
+        // game loop will be handled here 
     }
 
     static clearWrapperContent() {
@@ -103,11 +98,13 @@ class Player {
 }
 
 class Statistics {
-    constructor() {
+   
+    constructor() { 
         this.wins = 0
         this.losses = 0
         this.bustCount = 0
     }
+    
 
     postStats(player) {
 
@@ -117,8 +114,14 @@ class Statistics {
 
     }
 
-    displayStatsPage() {
+    static displayStatsPage() {
+        const wrapper = document.getElementsByClassName('wrapper')[0]
 
+        const statsWindow = document.createElement('div')
+        statsWindow.setAttribute('class', 'mainwindow')
+        statsWindow.innerText = "Test Content"
+
+        wrapper.appendChild(statsWindow)
     }
 }
 
