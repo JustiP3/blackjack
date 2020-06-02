@@ -20,16 +20,17 @@ class AppController {
         // game loop will be handled here 
     }
 
-    static clearWrapperContent() {
+    static clearWrapperContent() {       
         const wrapper = document.getElementsByClassName('wrapper')[0]
         const content = wrapper.getElementsByTagName('div') 
+         
 
-        for (let i = content.length - 1; i >=0 ; i--) {
+        while (content.length !== 0) {
             content[0].parentNode.removeChild(content[0])
         }
     }
 
-    static buildNavBar(currentScreen) { 
+    static buildNavBar(currentScreen) {         
         // current screens are 'home', 'game', and 'stats'
 
         const wrapper = document.getElementsByClassName('wrapper')[0]
