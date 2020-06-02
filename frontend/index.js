@@ -168,17 +168,17 @@ class Game {
     }
 
     displayNewRound() {
-        const computerCardsContainer = document.createElement('div')
-        const humanCardsContainer = document.createElement('div')        
+        this.computerCardsContainer = document.createElement('div')
+        this.humanCardsContainer = document.createElement('div')        
 
-        computerCardsContainer.setAttribute('class', 'player-hand-container')
-        humanCardsContainer.setAttribute('class', 'player-hand-container')        
+        this.computerCardsContainer.setAttribute('class', 'player-hand-container')
+        this.humanCardsContainer.setAttribute('class', 'player-hand-container')        
 
-        this.displayUpdatePlayerHand(computerCardsContainer, this.computer)
-        this.displayUpdatePlayerHand(humanCardsContainer, this.human)
+        this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
+        this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
 
-        this.gameWindow.appendChild(computerCardsContainer)
-        this.gameWindow.appendChild(humanCardsContainer)
+        this.gameWindow.appendChild(this.computerCardsContainer)
+        this.gameWindow.appendChild(this.humanCardsContainer)
         debugger 
     }
 
