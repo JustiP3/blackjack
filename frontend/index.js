@@ -111,8 +111,8 @@ class Game {
         this.gameWindow = this.displayGameWindow()
         
         while (this.quitGame === false) {  
-            this.newRound()
-            this.takeTurn(this.human)
+            this.newRound()            
+            this.takeTurn()
             //this.computerTurn(this.computer)
         
             this.roundComplete() 
@@ -121,22 +121,21 @@ class Game {
     }
 
     newRound() {
-        this.deck.newRound(this.human, this.computer)
-        this.displayNewRound()
+        if (this.stay === undefined || this.stay === true) {
+            this.deck.newRound(this.human, this.computer)
+            this.displayNewRound()
+        }
+                
     }
 
-    takeTurn(player) {
-        // add buttons for hit and stay 
-        let buttons 
+    takeTurn() {      
         this.stay = false 
 
-        while (this.stay === false) { 
-            debugger            
-            buttons = this.displayTurnControls()            
-        }
-        
-        buttons.remove()
+        let buttons = this.displayTurnControls() 
 
+        if (this.stay === true) {
+            buttons.remove()
+        }
     }
 
     computerTurn(player) {
@@ -146,8 +145,10 @@ class Game {
     roundComplete() {
         // prompt user to deal again or quit 
         // update this.quitGame 
-
-        this.quitGame = true 
+        if (this.stay === true) {
+            this.quitGame = true
+        }
+         
     }
 
     gameOver() {
@@ -181,6 +182,8 @@ class Game {
 
         this.gameWindow.appendChild(this.computerCardsContainer)
         this.gameWindow.appendChild(this.humanCardsContainer)
+
+        
     }
 
     displayUpdatePlayerHand(playerDiv, player) {
@@ -213,6 +216,7 @@ class Game {
         stayButton.innerText = "Stay"
 
         hitButton.addEventListener('click', () => {
+            console.log('hit me')
             this.deck.dealCard(human)
             this.displayUpdatePlayerHand(this.humanCardsContainer, human)
         })
@@ -222,7 +226,6 @@ class Game {
         buttonsContainer.appendChild(stayButton)
 
         this.humanCardsContainer.appendChild(buttonsContainer)
-
         return buttonsContainer 
     }
 }
