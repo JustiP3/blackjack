@@ -50,3 +50,8 @@ body {
     height: 80px;
     border-style: solid;
   }
+
+  .player-controls {
+    display: block; 
+    margin: 10px; 
+  }

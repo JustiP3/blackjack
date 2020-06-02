@@ -112,7 +112,7 @@ class Game {
         
         while (this.quitGame === false) {  
             this.newRound()
-            //this.takeTurn(this.human)
+            this.takeTurn(this.human)
             //this.computerTurn(this.computer)
         
             this.roundComplete() 
@@ -127,13 +127,15 @@ class Game {
 
     takeTurn(player) {
         // add buttons for hit and stay 
-        const buttons = displayTurnControls()
-        let stay = false 
+        let buttons 
+        this.stay = false 
 
-        while (stay === false) {
-            // draw cards 
-            // update DOM after each card draw 
+        while (this.stay === false) { 
+            debugger            
+            buttons = this.displayTurnControls()            
         }
+        
+        buttons.remove()
 
     }
 
@@ -179,7 +181,6 @@ class Game {
 
         this.gameWindow.appendChild(this.computerCardsContainer)
         this.gameWindow.appendChild(this.humanCardsContainer)
-        debugger 
     }
 
     displayUpdatePlayerHand(playerDiv, player) {
@@ -202,9 +203,27 @@ class Game {
         return card 
     }
 
-    displayTurnControls() {
-        // add hit and stay button for player turn 
-        return [] // return objects so we can easily delete them later 
+    displayTurnControls() {        
+        const buttonsContainer = document.createElement('div') 
+        const hitButton = document.createElement('button')
+        const stayButton = document.createElement('button')
+
+        buttonsContainer.setAttribute('class', 'player-controls')
+        hitButton.innerText = "Hit Me"
+        stayButton.innerText = "Stay"
+
+        hitButton.addEventListener('click', () => {
+            this.deck.dealCard(human)
+            this.displayUpdatePlayerHand(this.humanCardsContainer, human)
+        })
+        stayButton.addEventListener('click', () => this.stay = true)
+
+        buttonsContainer.appendChild(hitButton)
+        buttonsContainer.appendChild(stayButton)
+
+        this.humanCardsContainer.appendChild(buttonsContainer)
+
+        return buttonsContainer 
     }
 }
 
