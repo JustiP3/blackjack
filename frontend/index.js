@@ -21,10 +21,14 @@ class AppController {
         
         const player1 = new Player()
         const player2 = new Player() 
-
+        
         let game = new Game(player1, player2)
+        
         game.mainGameLoop() 
-        game = null         
+
+        if (game.quitGame === true) {
+            game = null    
+        }            
         
     }
 
@@ -107,7 +111,7 @@ class Game {
         const gameWindow = this.displayGameWindow()
         
         while (this.quitGame === false) {  
-            //this.newRound()
+            this.newRound(gameWindow)
             //this.takeTurn(this.human)
             //this.computerTurn(this.computer)
         
@@ -116,8 +120,9 @@ class Game {
         this.gameOver()
     }
 
-    newRound() {
-
+    newRound(window) {
+        this.deck.newRound(this.human, this.computer)
+        debugger 
     }
 
     takeTurn(player) {
@@ -137,7 +142,7 @@ class Game {
 
     gameOver() {
         console.log("game over")
-        
+
         AppController.clearWrapperContent()
         AppController.displayWelcome()
     }
@@ -224,11 +229,22 @@ class Statistics {
 
 class Deck {
     dealCard(player) {
+        const availableCards = this.allCards.map(function(card) {
+            if (card.available === true) {
+                return card 
+            }
+        })
+        debugger 
+        const cardIndex = Math.floor(Math.random() * Math.floor(availableCards.length))
 
+        this.allCards[cardIndex].available = false 
+        player.currentHand.push(this.allCards[cardIndex])
     }
 
     newRound(player1, player2) {
-
+        this.dealCard(player1)
+        this.dealCard(player1)
+        this.dealCard(player2)
     }
 
     endRound(player1, player2) {
