@@ -183,17 +183,15 @@ class Game {
 
         for (let i = 0; i < player.currentHand.length; i++) {
             const card = this.buildCard(player.currentHand[i])
-            playerDiv.appendChild(card)
-            debugger 
+            playerDiv.appendChild(card) 
         }
     }
 
     buildCard(cardObject) {
         const card = document.createElement('div')
         card.setAttribute('class', 'card')
-
-        card.innerText = "this is a card. test content"
-        card.innerText += cardObject.value
+        
+        card.innerText = `${cardObject.value} \n ${cardObject.suit}`
         return card 
     }
 }
