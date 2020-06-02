@@ -74,7 +74,7 @@ class AppController {
             createHomeButton()
         } else if (currentScreen === 'stats') {
             createHomeButton()
-            createStatsButton()
+            createNewGameButton()
         } else {
             console.log("Error: currentScreen options are 'home', 'game', or 'stats'")
         }
@@ -103,23 +103,53 @@ class Statistics {
         this.wins = 0
         this.losses = 0
         this.bustCount = 0
-    }
-    
+    }    
 
     postStats(player) {
 
     }
 
-    static fetchStats() {
+    static fetchStats(statsWindow) {
+        fetch("http://localhost:3000/statistics").then(function(response) {
+            return response.json();
+        }).then(function(json){
+
+            for (let i = 0; i < json.length; i++) {
+                Statistics.buildPlayerStatsContainer(statsWindow, json[i])
+            }
+
+        })
+    }
+
+    static buildPlayerStatsContainer(container, json) {
+        const playerStatsContainer = document.createElement('div')
+        playerStatsContainer.setAttribute('class', 'stats-container')
+
+        const statId = document.createElement('h1')
+        const winCount = document.createElement('p')
+        const lossCount = document.createElement('p')
+        const bustCount = document.createElement('p')
         
+        statId.innerText = `stat id is ${json.id}`
+        winCount.innerText = `Win Count: ${json.win_count}`
+        lossCount.innerText = `Loss Count: ${json.loss_count}`
+        bustCount.innerText = `Bust Count: ${json.bust_count}`
+
+        playerStatsContainer.appendChild(statId)
+        playerStatsContainer.appendChild(winCount)
+        playerStatsContainer.appendChild(lossCount)
+        playerStatsContainer.appendChild(bustCount)
+
+        container.appendChild(playerStatsContainer)
     }
 
     static displayStatsPage() {
         const wrapper = document.getElementsByClassName('wrapper')[0]
 
         const statsWindow = document.createElement('div')
-        statsWindow.setAttribute('class', 'mainwindow')
-        statsWindow.innerText = "Test Content"
+        statsWindow.setAttribute('class', 'main-window')
+
+        this.fetchStats(statsWindow)
 
         wrapper.appendChild(statsWindow)
     }

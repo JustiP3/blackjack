@@ -20,8 +20,14 @@ body {
   
   }
 
-  .mainwindow {   
+  .main-window {   
     background-color: green; 
     display: block; 
     margin: 10px;
+  }
+
+  .stats-container {
+    background-color: white;
+    display: inline-block;
+    margin: 10px; 
   }
