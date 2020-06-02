@@ -180,12 +180,11 @@ class Game {
     }
 
     displayUpdatePlayerHand(playerDiv, player) {
-        const cards = playerDiv.getElementsByTagName('div')
-        while (cards.length !== 0) {
-            cards[0].parentNode.removeChild(cards[0])
-        }
-
-        for (let i = 0; i < player.currentHand.length; i++) {
+        const cards = playerDiv.getElementsByClassName('card')
+        const numCardsCurrentlyDisplayed = cards.length 
+        debugger 
+        for (let i = numCardsCurrentlyDisplayed; i < player.currentHand.length; i++) {
+            debugger 
             const card = this.buildCard(player.currentHand[i])
             playerDiv.appendChild(card) 
         }
@@ -210,8 +209,8 @@ class Game {
 
         hitButton.addEventListener('click', () => {
             console.log('hit me')
-            this.deck.dealCard(human)
-            this.displayUpdatePlayerHand(this.humanCardsContainer, human)
+            this.deck.dealCard(this.human)
+            this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
         })
         stayButton.addEventListener('click', () => {
             console.log('stay')
