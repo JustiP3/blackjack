@@ -24,12 +24,11 @@ class AppController {
         
         let game = new Game(player1, player2)
         
-        game.mainGameLoop() 
+        game.newGame() 
 
         if (game.quitGame === true) {
             game = null    
-        }            
-        
+        }       
     }
 
     // DOM Updates
@@ -107,35 +106,31 @@ class Game {
         this.quitGame = false 
     }
 
-    mainGameLoop() {
+    newGame() {
         this.gameWindow = this.displayGameWindow()
+        this.phaseOneHuman() 
+    }
+
+    phaseOneHuman() {                   
+        this.newRound()            
+        this.takeTurn()        
+    }
+
+    phaseTwoComputer() {
+        //this.computerTurn(this.computer)
         
-        while (this.quitGame === false) {  
-            this.newRound()            
-            this.takeTurn()
-            //this.computerTurn(this.computer)
+        this.roundComplete() 
         
-            this.roundComplete() 
-        }
         this.gameOver()
     }
 
-    newRound() {
-        if (this.stay === undefined || this.stay === true) {
-            this.deck.newRound(this.human, this.computer)
-            this.displayNewRound()
-        }
-                
+    newRound() {        
+        this.deck.newRound(this.human, this.computer)
+        this.displayNewRound()                  
     }
 
-    takeTurn() {      
-        this.stay = false 
-
-        let buttons = this.displayTurnControls() 
-
-        if (this.stay === true) {
-            buttons.remove()
-        }
+    takeTurn() {  
+        this.displayTurnControls() 
     }
 
     computerTurn(player) {
@@ -181,9 +176,7 @@ class Game {
         this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
 
         this.gameWindow.appendChild(this.computerCardsContainer)
-        this.gameWindow.appendChild(this.humanCardsContainer)
-
-        
+        this.gameWindow.appendChild(this.humanCardsContainer)        
     }
 
     displayUpdatePlayerHand(playerDiv, player) {
@@ -220,13 +213,15 @@ class Game {
             this.deck.dealCard(human)
             this.displayUpdatePlayerHand(this.humanCardsContainer, human)
         })
-        stayButton.addEventListener('click', () => this.stay = true)
+        stayButton.addEventListener('click', () => {
+            console.log('stay')
+            this.phaseTwoComputer()
+        })
 
         buttonsContainer.appendChild(hitButton)
         buttonsContainer.appendChild(stayButton)
 
-        this.humanCardsContainer.appendChild(buttonsContainer)
-        return buttonsContainer 
+        this.humanCardsContainer.appendChild(buttonsContainer) 
     }
 }
 
