@@ -108,10 +108,10 @@ class Game {
     }
 
     mainGameLoop() {
-        const gameWindow = this.displayGameWindow()
+        this.gameWindow = this.displayGameWindow()
         
         while (this.quitGame === false) {  
-            this.newRound(gameWindow)
+            this.newRound()
             //this.takeTurn(this.human)
             //this.computerTurn(this.computer)
         
@@ -120,12 +120,20 @@ class Game {
         this.gameOver()
     }
 
-    newRound(window) {
+    newRound() {
         this.deck.newRound(this.human, this.computer)
-        this.displayNewRound(window)
+        this.displayNewRound()
     }
 
     takeTurn(player) {
+        // add buttons for hit and stay 
+        const buttons = displayTurnControls()
+        let stay = false 
+
+        while (stay === false) {
+            // draw cards 
+            // update DOM after each card draw 
+        }
 
     }
 
@@ -154,13 +162,12 @@ class Game {
 
         const gameWindow = document.createElement('div')
         gameWindow.setAttribute('class', 'main-window')
-        gameWindow.innerText = "Test Content inside game window"
 
         wrapper.appendChild(gameWindow)
         return gameWindow
     }
 
-    displayNewRound(window) {
+    displayNewRound() {
         const computerCardsContainer = document.createElement('div')
         const humanCardsContainer = document.createElement('div')        
 
@@ -170,8 +177,8 @@ class Game {
         this.displayUpdatePlayerHand(computerCardsContainer, this.computer)
         this.displayUpdatePlayerHand(humanCardsContainer, this.human)
 
-        window.appendChild(computerCardsContainer)
-        window.appendChild(humanCardsContainer)
+        this.gameWindow.appendChild(computerCardsContainer)
+        this.gameWindow.appendChild(humanCardsContainer)
         debugger 
     }
 
@@ -193,6 +200,11 @@ class Game {
         
         card.innerText = `${cardObject.value} \n ${cardObject.suit}`
         return card 
+    }
+
+    displayTurnControls() {
+        // add hit and stay button for player turn 
+        return [] // return objects so we can easily delete them later 
     }
 }
 
