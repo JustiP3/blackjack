@@ -4,26 +4,35 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 class AppController {
+
+    // Logical Program Flow
+    
     static displayWelcome() {
         this.buildNavBar('home')
     }
 
     static displayStatistics() {        
         this.buildNavBar('stats')
-
         Statistics.displayStatsPage()
     }
 
     static startNewGame() {
         this.buildNavBar('game')
         
+        const player1 = new Player()
+        const player2 = new Player() 
+
+        const game = new Game(player1, player2)
+
+        
         // game loop will be handled here 
     }
 
+    // DOM Updates
+
     static clearWrapperContent() {       
         const wrapper = document.getElementsByClassName('wrapper')[0]
-        const content = wrapper.getElementsByTagName('div') 
-         
+        const content = wrapper.getElementsByTagName('div')          
 
         while (content.length !== 0) {
             content[0].parentNode.removeChild(content[0])
