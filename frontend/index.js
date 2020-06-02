@@ -22,8 +22,9 @@ class AppController {
         const player1 = new Player()
         const player2 = new Player() 
 
-        const game = new Game(player1, player2)
+        let game = new Game(player1, player2)
         game.mainGameLoop() 
+        game = null 
     }
 
     // DOM Updates
@@ -102,13 +103,16 @@ class Game {
     }
 
     mainGameLoop() {
-
+        const gameWindow = this.displayGameWindow()
+        debugger 
         while (this.quitGame === false) {
-            this.newRound()
-            this.takeTurn(human)
-            this.computerTurn(computer)
+            //this.newRound()
+            //this.takeTurn(this.human)
+            //this.computerTurn(this.computer)
             this.roundComplete() 
+            this.quitGame = true 
         }
+        this.gameOver()
     }
 
     newRound() {
@@ -126,9 +130,27 @@ class Game {
     roundComplete() {
         // prompt user to deal again or quit 
         // update this.quitGame 
+
+        this.quitGame = true 
+    }
+
+    gameOver() {
+        AppController.clearWrapperContent
+        AppController.displayWelcome
     }
 
     // DOM Updates 
+
+    displayGameWindow() {
+        const wrapper = document.getElementsByClassName('wrapper')[0]
+
+        const gameWindow = document.createElement('div')
+        gameWindow.setAttribute('class', 'main-window')
+        gameWindow.innerText = "Test Content inside game window"
+
+        wrapper.appendChild(gameWindow)
+        return gameWindow
+    }
 
 }
 
