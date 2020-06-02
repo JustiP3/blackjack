@@ -122,7 +122,7 @@ class Game {
 
     newRound(window) {
         this.deck.newRound(this.human, this.computer)
-        debugger 
+        this.displayNewRound(window)
     }
 
     takeTurn(player) {
@@ -160,6 +160,17 @@ class Game {
         return gameWindow
     }
 
+    displayNewRound(window) {
+        const humanCardsContainer = document.createElement('div')
+        const computerCardsContainer = document.createElement('div')
+        
+        humanCardsContainer.setAttribute('class', 'player-hand-container')
+        computerCardsContainer.setAttribute('class', 'player-hand-container')
+    }
+
+    displayUpdatePlayerHand(playerDiv) {
+
+    }
 }
 
 class Player {
@@ -234,7 +245,7 @@ class Deck {
                 return card 
             }
         })
-        debugger 
+        
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCards.length))
 
         this.allCards[cardIndex].available = false 
