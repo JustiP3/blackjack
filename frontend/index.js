@@ -161,17 +161,43 @@ class Game {
     }
 
     displayNewRound(window) {
-        const humanCardsContainer = document.createElement('div')
         const computerCardsContainer = document.createElement('div')
-        
-        humanCardsContainer.setAttribute('class', 'player-hand-container')
+        const humanCardsContainer = document.createElement('div')        
+
         computerCardsContainer.setAttribute('class', 'player-hand-container')
+        humanCardsContainer.setAttribute('class', 'player-hand-container')        
+
+        this.displayUpdatePlayerHand(computerCardsContainer, this.computer)
+        this.displayUpdatePlayerHand(humanCardsContainer, this.human)
+
+        window.appendChild(computerCardsContainer)
+        window.appendChild(humanCardsContainer)
+        debugger 
     }
 
-    displayUpdatePlayerHand(playerDiv) {
+    displayUpdatePlayerHand(playerDiv, player) {
+        const cards = playerDiv.getElementsByTagName('div')
+        while (cards.length !== 0) {
+            cards[0].parentNode.removeChild(cards[0])
+        }
 
+        for (let i = 0; i < player.currentHand.length; i++) {
+            const card = this.buildCard(player.currentHand[i])
+            playerDiv.appendChild(card)
+            debugger 
+        }
+    }
+
+    buildCard(cardObject) {
+        const card = document.createElement('div')
+        card.setAttribute('class', 'card')
+
+        card.innerText = "this is a card. test content"
+        card.innerText += cardObject.value
+        return card 
     }
 }
+
 
 class Player {
     constructor() {
