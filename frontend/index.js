@@ -24,7 +24,8 @@ class AppController {
 
         let game = new Game(player1, player2)
         game.mainGameLoop() 
-        game = null 
+        game = null         
+        
     }
 
     // DOM Updates
@@ -104,13 +105,13 @@ class Game {
 
     mainGameLoop() {
         const gameWindow = this.displayGameWindow()
-        debugger 
-        while (this.quitGame === false) {
+        
+        while (this.quitGame === false) {  
             //this.newRound()
             //this.takeTurn(this.human)
             //this.computerTurn(this.computer)
+        
             this.roundComplete() 
-            this.quitGame = true 
         }
         this.gameOver()
     }
@@ -135,8 +136,10 @@ class Game {
     }
 
     gameOver() {
-        AppController.clearWrapperContent
-        AppController.displayWelcome
+        console.log("game over")
+        
+        AppController.clearWrapperContent()
+        AppController.displayWelcome()
     }
 
     // DOM Updates 
