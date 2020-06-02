@@ -182,9 +182,7 @@ class Game {
     displayUpdatePlayerHand(playerDiv, player) {
         const cards = playerDiv.getElementsByClassName('card')
         const numCardsCurrentlyDisplayed = cards.length 
-        debugger 
         for (let i = numCardsCurrentlyDisplayed; i < player.currentHand.length; i++) {
-            debugger 
             const card = this.buildCard(player.currentHand[i])
             playerDiv.appendChild(card) 
         }
@@ -220,7 +218,7 @@ class Game {
         buttonsContainer.appendChild(hitButton)
         buttonsContainer.appendChild(stayButton)
 
-        this.humanCardsContainer.appendChild(buttonsContainer) 
+        this.gameWindow.appendChild(buttonsContainer) 
     }
 }
 
