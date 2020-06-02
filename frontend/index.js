@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
 class AppController {
 
     // Logical Program Flow
-    
+
     static displayWelcome() {
         this.buildNavBar('home')
     }
@@ -23,9 +23,7 @@ class AppController {
         const player2 = new Player() 
 
         const game = new Game(player1, player2)
-
-        
-        // game loop will be handled here 
+        game.mainGameLoop() 
     }
 
     // DOM Updates
@@ -43,6 +41,7 @@ class AppController {
         // current screens are 'home', 'game', and 'stats'
 
         const wrapper = document.getElementsByClassName('wrapper')[0]
+
         const createHomeButton = function() {
             const homeScreen = document.createElement('div')
             homeScreen.setAttribute('class', 'button')
@@ -92,11 +91,44 @@ class AppController {
 }
 
 class Game {
+
+    // Logical Program Flow 
+
     constructor(player1, player2) {
         this.human = player1 
         this.computer = player2 
-        this.deck = new Deck 
+        this.deck = new Deck() 
+        this.quitGame = false 
     }
+
+    mainGameLoop() {
+
+        while (this.quitGame === false) {
+            this.newRound()
+            this.takeTurn(human)
+            this.computerTurn(computer)
+            this.roundComplete() 
+        }
+    }
+
+    newRound() {
+
+    }
+
+    takeTurn(player) {
+
+    }
+
+    computerTurn(player) {
+
+    }
+
+    roundComplete() {
+        // prompt user to deal again or quit 
+        // update this.quitGame 
+    }
+
+    // DOM Updates 
 
 }
 
