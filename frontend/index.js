@@ -156,7 +156,7 @@ class Game {
     }
 
     evaluatePoints(player) {
-        return player.currentHand.reduce((acc, cur) => {
+        const pointsAHigh = player.currentHand.reduce((acc, cur) => {
             switch(cur.value) {
                 case 'Two':
                     return acc + 2
@@ -192,6 +192,12 @@ class Game {
                     console.log('error: could not calculate the value of one of your cards')
             }
         }, 0)
+
+        if (!!player.currentHand.find(x => x.value === "Ace") && pointsAHigh > 21) {
+            const pointsALow = pointsAHigh - 10 
+            return pointsALow
+        }
+        return pointsAHigh
     }
 
     // DOM Updates 
