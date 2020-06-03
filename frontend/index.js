@@ -117,7 +117,7 @@ class Game {
     }
 
     phaseTwoComputer() {
-        //this.computerTurn(this.computer)
+        this.computerTurn()
         
         this.roundComplete() 
         
@@ -133,16 +133,18 @@ class Game {
         this.displayTurnControls() 
     }
 
-    computerTurn(player) {
-
+    computerTurn() {
+        let points = this.evaluatePoints(this.computer)
+        debugger 
     }
 
     roundComplete() {
         // prompt user to deal again or quit 
         // update this.quitGame 
-        if (this.stay === true) {
-            this.quitGame = true
-        }
+        // update player stats 
+      
+        this.quitGame = true
+       
          
     }
 
@@ -151,6 +153,45 @@ class Game {
 
         AppController.clearWrapperContent()
         AppController.displayWelcome()
+    }
+
+    evaluatePoints(player) {
+        return player.currentHand.reduce((acc, cur) => {
+            switch(cur.value) {
+                case 'Two':
+                    return acc + 2
+                case 'Three':
+                    return acc + 3
+                case 'Four':
+                    return acc + 4
+                case 'Five':
+                    return acc + 5
+                case 'Six':
+                    return acc + 6
+                case 'Seven':
+                    return acc + 7
+                case 'Eight':
+                    return acc + 8
+                case 'Nine':
+                    return acc + 9
+                case 'Ten': 
+                    return acc + 10
+                case 'Jack':
+                    return acc + 10
+                case 'Queen':
+                    return acc + 10
+                case 'King':
+                    return acc + 10
+                case 'Queen':
+                    return acc + 10
+                case 'King':
+                    return acc + 10
+                case 'Ace':
+                    return acc + 11                    
+                default: 
+                    console.log('error: could not calculate the value of one of your cards')
+            }
+        }, 0)
     }
 
     // DOM Updates 
