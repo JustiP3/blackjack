@@ -25,10 +25,7 @@ class AppController {
         let game = new Game(player1, player2)
         
         game.newGame() 
-
-        if (game.quitGame === true) {
-            game = null    
-        }       
+      
     }
 
     // DOM Updates
@@ -103,11 +100,11 @@ class Game {
         this.human = player1 
         this.computer = player2 
         this.deck = new Deck() 
-        this.quitGame = false 
     }
 
     newGame() {
         this.gameWindow = this.displayGameWindow()
+        this.buildTable()
         this.phaseOneHuman() 
     }
 
@@ -151,13 +148,7 @@ class Game {
     roundComplete() {
         let winner = this.evaluateWinnerAndUpdateStats()      
         
-        this.displayWinnerAndPrompt(winner)
-        //this.deck.endRound()  - need to build function 
-
-        // prompt user to deal again or quit 
-        // update this.quitGame 
-        debugger 
-        this.quitGame = true      
+        this.displayWinnerAndPrompt(winner)    
     }
 
     gameOver() {
@@ -286,18 +277,10 @@ class Game {
         return gameWindow
     }
 
-    displayNewRound() {
-        this.computerCardsContainer = document.createElement('div')
-        this.humanCardsContainer = document.createElement('div')        
-
-        this.computerCardsContainer.setAttribute('class', 'player-hand-container')
-        this.humanCardsContainer.setAttribute('class', 'player-hand-container')        
-
+    displayNewRound() {    
+        // clear cards from board first
         this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
-        this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
-
-        this.gameWindow.appendChild(this.computerCardsContainer)
-        this.gameWindow.appendChild(this.humanCardsContainer)        
+        this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)              
     }
 
     displayUpdatePlayerHand(playerDiv, player) {
@@ -317,12 +300,10 @@ class Game {
         return card 
     }
 
-    displayTurnControls() {        
-        const buttonsContainer = document.createElement('div') 
+    displayTurnControls() {                
         const hitButton = document.createElement('button')
         const stayButton = document.createElement('button')
-
-        buttonsContainer.setAttribute('class', 'player-controls')
+        
         hitButton.setAttribute('class', 'button')
         stayButton.setAttribute('class', 'button')
 
@@ -339,10 +320,8 @@ class Game {
             this.phaseTwoComputer()
         })
 
-        buttonsContainer.appendChild(hitButton)
-        buttonsContainer.appendChild(stayButton)
-
-        this.gameWindow.appendChild(buttonsContainer) 
+        this.buttonsContainer.appendChild(hitButton)
+        this.buttonsContainer.appendChild(stayButton)        
     }
 
     displayWinnerAndPrompt(winner) {
@@ -363,8 +342,7 @@ class Game {
         while (turnControls.length > 0) {
             turnControls[0].remove()
         }
-
-        const buttonsContainer = document.getElementsByClassName('player-controls')[0]
+       
         const dealAgain = document.createElement('button')
         const quitGame = document.createElement('button')
 
@@ -377,8 +355,22 @@ class Game {
         dealAgain.addEventListener('click', this.phaseOneHuman)
         quitGame.addEventListener('click', this.gameOver)
 
-        buttonsContainer.appendChild(dealAgain)
-        buttonsContainer.appendChild(quitGame)
+        this.buttonsContainer.appendChild(dealAgain)
+        this.buttonsContainer.appendChild(quitGame)
+    }
+
+    buildTable() {
+        this.computerCardsContainer = document.createElement('div')
+        this.humanCardsContainer = document.createElement('div')    
+        this.buttonsContainer = document.createElement('div')    
+
+        this.computerCardsContainer.setAttribute('class', 'player-hand-container')
+        this.humanCardsContainer.setAttribute('class', 'player-hand-container')  
+        buttonsContainer.setAttribute('class', 'player-controls') 
+
+        this.gameWindow.appendChild(this.computerCardsContainer)
+        this.gameWindow.appendChild(this.humanCardsContainer)
+        this.gameWindow.appendChild(buttonsContainer)      
     }
 }
 
