@@ -108,8 +108,10 @@ class Game {
         this.phaseOneHuman() 
     }
 
-    phaseOneHuman() {      
-        debugger              
+    phaseOneHuman() {   
+        this.human.currentHand = []
+        this.computer.currentHand = []   
+                    
         this.newRound()            
         this.takeTurn()        
     }
@@ -278,8 +280,17 @@ class Game {
         return gameWindow
     }
 
-    displayNewRound() {    
-        // clear cards from board first
+    displayNewRound() {         
+        while (this.humanCardsContainer.childNodes.length > 0) {
+            this.humanCardsContainer.childNodes[0].remove()
+        }
+        while (this.computerCardsContainer.childNodes.length > 0) {
+            this.humanCardsContainer.childNodes[0].remove()
+        }
+        while (this.buttonsContainer.childNodes.length > 0) {
+            this.buttonsContainer.childNodes[0].remove()
+        }
+
         this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
         this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)              
     }
@@ -454,14 +465,12 @@ class Deck {
         player.currentHand.push(this.allCards[cardIndex])
     }
 
-    newRound(player1, player2) {
+    newRound(player1, player2) {        
+        this.allCards.forEach((x) => x.available = true)
+        
         this.dealCard(player1)
         this.dealCard(player1)
         this.dealCard(player2)
-    }
-
-    endRound(player1, player2) {
-
     }
 
     allCards = [

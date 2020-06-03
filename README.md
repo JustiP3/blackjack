@@ -17,3 +17,6 @@ evaluatepoints will not work right now if a user has more than one ace
 garbage collection question
 -if i remove buttons every round and replace them will i be recreating buttons?
 -does remove() from the DOM remove that variable from memory?
+
+index.js:288 Uncaught TypeError: Cannot read property 'remove' of undefined
+    at Game.displayNewRound (index.js:288)
