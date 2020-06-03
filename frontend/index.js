@@ -135,17 +135,32 @@ class Game {
 
     computerTurn() {
         let points = this.evaluatePoints(this.computer)
-        debugger 
+        const humanPoints = this.evaluatePoints(this.human)
+
+        if (humanPoints > 21)
+        {
+            this.deck.dealCard(this.computer)
+        } else {
+            while (points < 16 && points > humanPoints) {
+                this.deck.dealCard(this.computer)
+                points = this.evaluatePoints(this.computer)
+            }  
+        }
+
+        this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
+                   
     }
 
     roundComplete() {
+        const humanPoints = this.evaluatePoints(this.human)
+        const computerPoints = this.evaluatePoints(this.computer)
+
+
         // prompt user to deal again or quit 
         // update this.quitGame 
         // update player stats 
       
-        this.quitGame = true
-       
-         
+        this.quitGame = true      
     }
 
     gameOver() {
