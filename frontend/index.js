@@ -108,7 +108,8 @@ class Game {
         this.phaseOneHuman() 
     }
 
-    phaseOneHuman() {                   
+    phaseOneHuman() {      
+        debugger              
         this.newRound()            
         this.takeTurn()        
     }
@@ -331,7 +332,6 @@ class Game {
 
         this.gameWindow.appendChild(displayWinner)
 
-        debugger 
 
         // need to build function
     }
@@ -352,7 +352,7 @@ class Game {
         dealAgain.setAttribute('class', 'button')
         quitGame.setAttribute('class', 'button')
 
-        dealAgain.addEventListener('click', this.phaseOneHuman)
+        dealAgain.addEventListener('click', () => this.phaseOneHuman())
         quitGame.addEventListener('click', this.gameOver)
 
         this.buttonsContainer.appendChild(dealAgain)
@@ -366,11 +366,11 @@ class Game {
 
         this.computerCardsContainer.setAttribute('class', 'player-hand-container')
         this.humanCardsContainer.setAttribute('class', 'player-hand-container')  
-        buttonsContainer.setAttribute('class', 'player-controls') 
+        this.buttonsContainer.setAttribute('class', 'player-controls') 
 
         this.gameWindow.appendChild(this.computerCardsContainer)
         this.gameWindow.appendChild(this.humanCardsContainer)
-        this.gameWindow.appendChild(buttonsContainer)      
+        this.gameWindow.appendChild(this.buttonsContainer)      
     }
 }
 
