@@ -345,6 +345,7 @@ class Game {
     }
 
     displayWinnerAndPrompt(winner) {
+        this.displayEndRoundControls()
         const displayWinner = document.createElement('h2')
         displayWinner.innerText = `${winner} wins!`
 
@@ -353,6 +354,30 @@ class Game {
         debugger 
 
         // need to build function
+    }
+
+    displayEndRoundControls() {
+        const turnControls = document.getElementsByClassName('button')
+
+        while (turnControls.length > 0) {
+            turnControls[0].remove()
+        }
+
+        const buttonsContainer = getElementsByClassName('player-controls')[0]
+        const dealAgain = document.createElement('button')
+        const quitGame = document.createElement('button')
+
+        dealAgain.innerText = "Deal Again"
+        quitGame.innerText = "Quit Game"
+
+        dealAgain.setAttribute('class', 'button')
+        quitGame.setAttribute('class', 'button')
+
+        dealAgain.addEventListener('click', this.phaseOneHuman)
+        quitGame.addEventListener('click', this.gameOver)
+
+        buttonsContainer.appendChild(dealAgain)
+        buttonsContainer.appendChild(quitGame)
     }
 }
 
