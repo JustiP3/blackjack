@@ -141,7 +141,7 @@ class Game {
         {
             this.deck.dealCard(this.computer)
         } else {
-            while (points < 16 && points > humanPoints) {
+            while (points < 16 && points < humanPoints) {
                 this.deck.dealCard(this.computer)
                 points = this.evaluatePoints(this.computer)
             }  
@@ -152,11 +152,12 @@ class Game {
     }
 
     roundComplete() {
-        this.evaluateWinnerAndUpdateStats()      
-
+        let winner = this.evaluateWinnerAndUpdateStats()      
+        
+        this.displayWinnerAndPrompt(winner)
         // prompt user to deal again or quit 
         // update this.quitGame 
-      
+        debugger 
         this.quitGame = true      
     }
 
@@ -217,19 +218,43 @@ class Game {
     evaluateWinnerAndUpdateStats() {
         const humanPoints = this.evaluatePoints(this.human)
         const computerPoints = this.evaluatePoints(this.computer)
+        let winner = null 
 
         if (humanPoints > computerPoints && humanPoints <= 21) {
             // human wins 
-            this.human.stats.winCount += 1 
-            this.computer.stats.lossCount += 1 
+            winner = this.human
         } else if (computerPoints > humanPoints && computerPoints <= 21) {
             //computer wins
-            this.computer.stats.winCount += 1 
-            this.human.stats.lossCount += 1 
+            winner = this.computer 
+        } else if (humanPoints > 21 && computerPoints <=21) {
+            //computer wins            
+            winner = this.computer
+        } else if (computerPoints > 21 && humanPoints <=21) {
+            // human wins             
+            winner = this.human
         } else if (computerPoints > 21 && humanPoints > 21) {
             // nobody wins 
-            this.computer.stats.lossCount += 1 
-            this.human.stats.lossCount += 1 
+            winner = null 
+        } else if (computerPoints === humanPoints) {
+            // nobody wins 
+            winner = null 
+        } else {
+            console.log("error: cannot evaluate winner")
+        }
+
+        switch (winner) {
+            case this.human:
+                this.human.stats.winCount += 1 
+                this.computer.stats.lossCount += 1 
+                break;
+            case this.computer: 
+                this.computer.stats.winCount += 1 
+                this.human.stats.lossCount += 1 
+                break;
+            case null: 
+                this.computer.stats.lossCount += 1 
+                this.human.stats.lossCount += 1 
+                break;
         }
 
         if (humanPoints > 21) {
@@ -240,6 +265,7 @@ class Game {
             this.computer.stats.bustCount += 1
         }
         // **** need to update stats on the back end ****
+        return winner 
     }
 
     // DOM Updates 
@@ -308,6 +334,10 @@ class Game {
         buttonsContainer.appendChild(stayButton)
 
         this.gameWindow.appendChild(buttonsContainer) 
+    }
+
+    displayWinnerAndPrompt(winner) {
+        // need to build function
     }
 }
 
