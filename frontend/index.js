@@ -117,8 +117,7 @@ class Game {
     }
 
     phaseTwoComputer() {
-        this.computerTurn()
-        
+        this.computerTurn()        
         this.roundComplete() 
         
         this.gameOver()
@@ -155,6 +154,8 @@ class Game {
         let winner = this.evaluateWinnerAndUpdateStats()      
         
         this.displayWinnerAndPrompt(winner)
+        //this.deck.endRound()  - need to build function 
+
         // prompt user to deal again or quit 
         // update this.quitGame 
         debugger 
@@ -244,16 +245,16 @@ class Game {
 
         switch (winner) {
             case this.human:
-                this.human.stats.winCount += 1 
-                this.computer.stats.lossCount += 1 
+                this.human.stats.wins += 1 
+                this.computer.stats.losses += 1 
                 break;
             case this.computer: 
-                this.computer.stats.winCount += 1 
-                this.human.stats.lossCount += 1 
+                this.computer.stats.wins += 1 
+                this.human.stats.losses += 1 
                 break;
             case null: 
-                this.computer.stats.lossCount += 1 
-                this.human.stats.lossCount += 1 
+                this.computer.stats.losses += 1 
+                this.human.stats.losses += 1 
                 break;
         }
 
@@ -265,7 +266,14 @@ class Game {
             this.computer.stats.bustCount += 1
         }
         // **** need to update stats on the back end ****
-        return winner 
+
+        if (winner === this.human) {
+            return "Human"
+        } else if (winner === this.computer) {
+            return "Computer"
+        } else if (winner === null) {
+            return "Nobody"
+        }
     }
 
     // DOM Updates 
@@ -337,6 +345,13 @@ class Game {
     }
 
     displayWinnerAndPrompt(winner) {
+        const displayWinner = document.createElement('h2')
+        displayWinner.innerText = `${winner} wins!`
+
+        this.gameWindow.appendChild(displayWinner)
+
+        debugger 
+
         // need to build function
     }
 }
