@@ -118,9 +118,7 @@ class Game {
 
     phaseTwoComputer() {
         this.computerTurn()        
-        this.roundComplete() 
-        
-        this.gameOver()
+        this.roundComplete()         
     }
 
     newRound() {        
@@ -325,6 +323,9 @@ class Game {
         const stayButton = document.createElement('button')
 
         buttonsContainer.setAttribute('class', 'player-controls')
+        hitButton.setAttribute('class', 'button')
+        stayButton.setAttribute('class', 'button')
+
         hitButton.innerText = "Hit Me"
         stayButton.innerText = "Stay"
 
@@ -363,7 +364,7 @@ class Game {
             turnControls[0].remove()
         }
 
-        const buttonsContainer = getElementsByClassName('player-controls')[0]
+        const buttonsContainer = document.getElementsByClassName('player-controls')[0]
         const dealAgain = document.createElement('button')
         const quitGame = document.createElement('button')
 
