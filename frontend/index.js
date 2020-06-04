@@ -104,8 +104,8 @@ class Game {
 
     newGame() {
         this.gameWindow = this.displayGameWindow()
-        this.human.stats.postStats(this.human)
-        this.computer.stats.postStats(this.computer)
+        this.human.stats.newGameCreateStats(this.human)
+        this.computer.stats.newGameCreateStats(this.computer)
         
         this.buildTable()
         this.phaseOneHuman() 
@@ -260,7 +260,9 @@ class Game {
         if (computerPoints > 21) {
             this.computer.stats.bustCount += 1
         }
-        // **** need to update stats on the back end ****
+        
+        this.human.stats.updateStats(this.human)
+        this.computer.stats.updateStats(this.computer)
 
         if (winner === this.human) {
             return "Human"
@@ -411,7 +413,7 @@ class Statistics {
         this.bustCount = 0
     }    
 
-    postStats(player) {
+    newGameCreateStats(player) {
         const configurationObject = {
             method: "POST",
             headers: {
@@ -424,12 +426,17 @@ class Statistics {
         fetch('http://localhost:3000/statistics', configurationObject).then(function(response) {
             return response.json();
         }).then(function(json){
-            console.log(json)
-            debugger 
+            if (!!json) {
+                console.log("stats initialized sucessfully") 
+            } else {
+                console.log("stats not sucessful")
+            }
         })
     }
     
+    updateStats(player) {
 
+    }
     
 
     
