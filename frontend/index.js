@@ -104,8 +104,7 @@ class Game {
 
     newGame() {
         this.gameWindow = this.displayGameWindow()
-        this.human.stats.newGameCreateStats(this.human)
-        this.computer.stats.newGameCreateStats(this.computer)
+        this.human.stats.newGameCreateStats(this.human).then(this.computer.stats.newGameCreateStats(this.computer))        
         
         this.buildTable()
         this.phaseOneHuman() 
@@ -262,8 +261,7 @@ class Game {
         }
         
         // UPDATE BACKEND STATS 
-        this.human.stats.updateStats(this.human)
-        this.computer.stats.updateStats(this.computer)
+        this.human.stats.updateStats(this.human).then(this.computer.stats.updateStats(this.computer))        
 
         if (winner === this.human) {
             return "Human"
@@ -402,6 +400,24 @@ class Player {
         this.currentHand = []
         this.stats = new Statistics
     }
+
+    fetchPlayer() {
+        const configurationObject = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(this.id)
+          }
+
+        return fetch('http://localhost:3000/players', configurationObject).then(function(response) {
+            return response.json();
+        }).then(function(json){
+            console.log(json)
+            return json 
+        })
+    }
 }
 
 class Statistics {
@@ -409,6 +425,7 @@ class Statistics {
     // Instance Methods 
    
     constructor() { 
+        this.id = null 
         this.wins = 0
         this.losses = 0
         this.bustCount = 0
@@ -424,14 +441,11 @@ class Statistics {
             body: JSON.stringify(player)
           }
 
-        fetch('http://localhost:3000/statistics', configurationObject).then(function(response) {
+        return fetch('http://localhost:3000/statistics', configurationObject).then(function(response) {
             return response.json();
         }).then(function(json){
-            if (!!json) {
-                console.log("stats initialized sucessfully") 
-            } else {
-                console.log("stats not sucessful")
-            }
+            console.log(json)
+            return json 
         })
     }
     
@@ -445,17 +459,10 @@ class Statistics {
             body: JSON.stringify(player)
           }
 
-        fetch(`http://localhost:3000/statistics/${player.id}`, configurationObject).then(function(response) {
+        return fetch(`http://localhost:3000/statistics/${player.id}`, configurationObject).then(function(response) {
             return response.json();
-        }).then(function(json){
-           /*
-            if (!!json) {
-                console.log("stats initialized sucessfully") 
-            } else {
-                console.log("stats not sucessful")
-            }
-            */
-           console.log(json)
+        }).then(function(json){          
+           return console.log(json)
         })
     }
     

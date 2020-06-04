@@ -1,8 +1,8 @@
 
 
 STATS -
-On new game - create a new game on the backend for player 1 and player 2
-At the end of the round - POST to update current session stats 
+On new game - POST a new game on the backend for player 1 and player 2
+At the end of the round - PATCH to update current session stats 
 
 DISPLAY 
 -Show All time wins/losses/bustCount for Computer and Human (reduce all games to total count)
@@ -25,4 +25,6 @@ when playing through the game loop multiple times
     at Game.phaseOneHuman (index.js:118)
     at HTMLButtonElement.<anonymous> (index.js:376)
 
+
+#<ActiveRecord::StatementInvalid: SQLite3::BusyException: database is locked>
 
