@@ -12,8 +12,11 @@ class StatisticsController < ApplicationController
         stats.loss_count = params["stats"]["losses"]
         stats.bust_count = params["stats"]["bustCount"]
          
-        stats.save 
-        render json: stats 
+        if stats.save 
+            render json: stats 
+        else 
+            render json: stats.errors
+        end 
         
     end 
 
