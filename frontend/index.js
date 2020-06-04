@@ -280,16 +280,23 @@ class Game {
         return gameWindow
     }
 
-    displayNewRound() {         
+    displayNewRound() {  
+        const winnerMessage = this.gameWindow.getElementsByTagName('h2')
+        
+        while (winnerMessage.length > 0) {
+            winnerMessage[0].remove()
+        }
         while (this.humanCardsContainer.childNodes.length > 0) {
             this.humanCardsContainer.childNodes[0].remove()
         }
         while (this.computerCardsContainer.childNodes.length > 0) {
-            this.humanCardsContainer.childNodes[0].remove()
+            this.computerCardsContainer.childNodes[0].remove()
         }
         while (this.buttonsContainer.childNodes.length > 0) {
             this.buttonsContainer.childNodes[0].remove()
         }
+        
+
 
         this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
         this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)              
