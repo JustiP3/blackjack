@@ -16,10 +16,9 @@ class StatisticsController < ApplicationController
         stats.win_count = win_count
         stats.loss_count = loss_count
         stats.bust_count = bust_count
-        
-        binding.pry 
+         
         stats.save 
-
+        render json: stats 
         
     end 
 

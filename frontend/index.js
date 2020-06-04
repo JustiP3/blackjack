@@ -425,6 +425,7 @@ class Statistics {
             return response.json();
         }).then(function(json){
             console.log(json)
+            debugger 
         })
     }
     
