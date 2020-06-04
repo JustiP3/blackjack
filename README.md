@@ -1,10 +1,12 @@
 
 
 STATS -
-Stats will be initialized (created on the backend) on new game 
-update backend stats at the end of each round 
-at the end of the game update the backend stats 
--need to update evaluatewinnerandupdatestats method 
+On new game - create a new game on the backend for player 1 and player 2
+At the end of the round - POST to update current session stats 
+
+DISPLAY 
+-Show All time wins/losses/bustCount for Computer and Human (reduce all games to total count)
+-(optional) - show recent games 
 
 
 evaluatepoints will not work right now if a user has more than one ace

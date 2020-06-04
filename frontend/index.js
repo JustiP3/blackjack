@@ -104,6 +104,9 @@ class Game {
 
     newGame() {
         this.gameWindow = this.displayGameWindow()
+        this.human.stats.postStats(this.human)
+        this.computer.stats.postStats(this.computer)
+        
         this.buildTable()
         this.phaseOneHuman() 
     }
@@ -409,12 +412,26 @@ class Statistics {
     }    
 
     postStats(player) {
+        const configurationObject = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(player)
+          }
 
+        fetch('http://localhost:3000/statistics', configurationObject).then(function(response) {
+            return response.json();
+        }).then(function(json){
+            console.log(json)
+        })
     }
+    
 
-    fetchPlayerStats(player,) {
+    
 
-    }
+    
 
     // Static Methods 
 
