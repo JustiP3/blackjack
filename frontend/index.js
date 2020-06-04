@@ -19,8 +19,8 @@ class AppController {
     static startNewGame() {
         this.buildNavBar('game')
         
-        const player1 = new Player()
-        const player2 = new Player() 
+        const player1 = new Player(1)
+        const player2 = new Player(2) 
         
         let game = new Game(player1, player2)
         
@@ -349,9 +349,6 @@ class Game {
         displayWinner.innerText = `${winner} wins!`
 
         this.gameWindow.appendChild(displayWinner)
-
-
-        // need to build function
     }
 
     displayEndRoundControls() {
@@ -394,13 +391,16 @@ class Game {
 
 
 class Player {
-    constructor() {
+    constructor(id) {
+        this.id = id 
         this.currentHand = []
         this.stats = new Statistics
     }
 }
 
 class Statistics {
+
+    // Instance Methods 
    
     constructor() { 
         this.wins = 0
@@ -411,6 +411,12 @@ class Statistics {
     postStats(player) {
 
     }
+
+    fetchPlayerStats(player,) {
+
+    }
+
+    // Static Methods 
 
     static fetchStats(statsWindow) {
         fetch("http://localhost:3000/statistics").then(function(response) {
@@ -469,7 +475,6 @@ class Deck {
         })
         
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
-        debugger 
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
         player.currentHand.push(this.allCards[cardIndex])
     }
