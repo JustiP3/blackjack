@@ -460,15 +460,17 @@ class Statistics {
 
 class Deck {
     dealCard(player) {
-        const availableCards = this.allCards.map(function(card) {
+        let i = 0 
+        const availableCardsIndicies = this.allCards.map(function(card) {      
+            i++      
             if (card.available === true) {
-                return card 
-            }
+                return i-1
+            }          
         })
         
-        const cardIndex = Math.floor(Math.random() * Math.floor(availableCards.length))
-
-        this.allCards[cardIndex].available = false 
+        const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
+        debugger 
+        this.allCards[availableCardsIndicies[cardIndex]].available = false 
         player.currentHand.push(this.allCards[cardIndex])
     }
 

@@ -1,8 +1,4 @@
-displaywinner and prompt // need to update dom at the end of a round
-to display winner and to prompt user to continue or quit 
 
-// check - after user turn what happens to user controls?
-they should be removed  => currently they are not removed
 
 STATS -
 Stats will be initialized (created on the backend) on new game 
@@ -18,5 +14,3 @@ garbage collection question
 -if i remove buttons every round and replace them will i be recreating buttons?
 -does remove() from the DOM remove that variable from memory?
 
-index.js:288 Uncaught TypeError: Cannot read property 'remove' of undefined
-    at Game.displayNewRound (index.js:288)
