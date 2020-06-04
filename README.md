@@ -17,4 +17,12 @@ garbage collection question
 -does remove() from the DOM remove that variable from memory?
 
 
+when playing through the game loop multiple times
+-index.js:525 Uncaught TypeError: Cannot set property 'available' of undefined
+    at Deck.dealCard (index.js:525)
+    at Deck.newRound (index.js:534)
+    at Game.newRound (index.js:128)
+    at Game.phaseOneHuman (index.js:118)
+    at HTMLButtonElement.<anonymous> (index.js:376)
+
 

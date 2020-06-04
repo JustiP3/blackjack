@@ -153,7 +153,7 @@ class Game {
 
     roundComplete() {
         let winner = this.evaluateWinnerAndUpdateStats()      
-        
+        debugger 
         this.displayWinnerAndPrompt(winner)    
     }
 
@@ -261,6 +261,7 @@ class Game {
             this.computer.stats.bustCount += 1
         }
         
+        // UPDATE BACKEND STATS 
         this.human.stats.updateStats(this.human)
         this.computer.stats.updateStats(this.computer)
 
@@ -435,8 +436,29 @@ class Statistics {
     }
     
     updateStats(player) {
+        const configurationObject = {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(player)
+          }
 
+        fetch(`http://localhost:3000/statistics/${player.id}`, configurationObject).then(function(response) {
+            return response.json();
+        }).then(function(json){
+           /*
+            if (!!json) {
+                console.log("stats initialized sucessfully") 
+            } else {
+                console.log("stats not sucessful")
+            }
+            */
+           console.log(json)
+        })
     }
+    
     
 
     
