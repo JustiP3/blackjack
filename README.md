@@ -27,4 +27,5 @@ when playing through the game loop multiple times
 
 
 #<ActiveRecord::StatementInvalid: SQLite3::BusyException: database is locked>
+ - SQLLite3 was not designed for concurrent db acess 
 

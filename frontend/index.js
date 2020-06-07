@@ -104,7 +104,13 @@ class Game {
 
     newGame() {
         this.gameWindow = this.displayGameWindow()
-        this.human.stats.newGameCreateStats(this.human).then(this.computer.stats.newGameCreateStats(this.computer))        
+        
+        this.human.fetchPlayer().then(
+        this.computer.fetchPlayer()
+        ).then(
+        this.human.stats.newGameCreateStats(this.human)
+        ).then(
+        this.computer.stats.newGameCreateStats(this.computer))        
         
         this.buildTable()
         this.phaseOneHuman() 
