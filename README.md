@@ -28,4 +28,10 @@ when playing through the game loop multiple times
 
 #<ActiveRecord::StatementInvalid: SQLite3::BusyException: database is locked>
  - SQLLite3 was not designed for concurrent db acess 
+ - fixed with asynchronous function calls
+
+***OPEN ISSUES***
+ Statistics are not being updated at the end of a round 
+ -I think I am passing the wrong ID to update statistics
+ -Needs to be id of this game's player statistics not the id of the player 
 
