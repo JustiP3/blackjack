@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
     def create         
         player = Player.find_by(name: params["id"])
 
-        if player 
+        if !!player 
             render json: player
         else             
             player = Player.new

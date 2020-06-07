@@ -104,13 +104,9 @@ class Game {
 
     newGame() {
         this.gameWindow = this.displayGameWindow()
-        
-        this.human.fetchPlayer().then(
-        this.computer.fetchPlayer()
-        ).then(
-        this.human.stats.newGameCreateStats(this.human)
-        ).then(
-        this.computer.stats.newGameCreateStats(this.computer))        
+
+        this.human.fetchPlayer().then((resp) => this.computer.fetchPlayer())
+        .then((resp) => this.human.stats.newGameCreateStats(this.human)).then((resp) => this.computer.stats.newGameCreateStats(this.computer))        
         
         this.buildTable()
         this.phaseOneHuman() 
@@ -158,7 +154,6 @@ class Game {
 
     roundComplete() {
         let winner = this.evaluateWinnerAndUpdateStats()      
-        debugger 
         this.displayWinnerAndPrompt(winner)    
     }
 
@@ -267,7 +262,7 @@ class Game {
         }
         
         // UPDATE BACKEND STATS 
-        this.human.stats.updateStats(this.human).then(this.computer.stats.updateStats(this.computer))        
+        this.human.stats.updateStats(this.human).then(() => this.computer.stats.updateStats(this.computer))        
 
         if (winner === this.human) {
             return "Human"
@@ -408,6 +403,7 @@ class Player {
     }
 
     fetchPlayer() {
+        console.log("fetching player")
         const configurationObject = {
             method: "POST",
             headers: {
