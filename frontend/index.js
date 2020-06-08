@@ -277,7 +277,7 @@ class Game {
         }
         
         // UPDATE BACKEND STATS 
-        debugger 
+        
         this.human.stats.updateStats(this.human).then(() => this.computer.stats.updateStats(this.computer))        
 
         if (winner === this.human) {
@@ -556,7 +556,6 @@ class Deck {
         })
         
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
-        debugger 
      
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
         player.currentHand.push(this.allCards[cardIndex])

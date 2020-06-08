@@ -23,6 +23,15 @@ garbage collection question
  -I think I am passing the wrong ID to update statistics
  -Needs to be id of this game's player statistics not the id of the player 
 
+ when playing through the game loop multiple times
+-index.js:525 Uncaught TypeError: Cannot set property 'available' of undefined
+    at Deck.dealCard (index.js:525)
+    at Deck.newRound (index.js:534)
+    at Game.newRound (index.js:128)
+    at Game.phaseOneHuman (index.js:118)
+    at HTMLButtonElement.<anonymous> (index.js:376)
+    -Should be fixed - will continue to monitor 
+
  ***TODO***
 -Display stats in a useful way 
 -Make display look nicer
@@ -31,12 +40,6 @@ garbage collection question
 -if user goes over 21, do not allow them to continue getting cards (BUST!)
 
 ***OPEN ISSUES***
-when playing through the game loop multiple times
--index.js:525 Uncaught TypeError: Cannot set property 'available' of undefined
-    at Deck.dealCard (index.js:525)
-    at Deck.newRound (index.js:534)
-    at Game.newRound (index.js:128)
-    at Game.phaseOneHuman (index.js:118)
-    at HTMLButtonElement.<anonymous> (index.js:376)
+
 
 -evaluatepoints will not work right now if a user has more than one ace
