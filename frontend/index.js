@@ -105,8 +105,20 @@ class Game {
     newGame() {
         this.gameWindow = this.displayGameWindow()
 
-        this.human.fetchPlayer().then((resp) => this.computer.fetchPlayer())
-        .then((resp) => this.human.stats.newGameCreateStats(this.human)).then((resp) => this.computer.stats.newGameCreateStats(this.computer))        
+        this.human.fetchPlayer().then((resp) => {
+            if (resp === null) {
+                return this.human.fetchCreatePlayer().then((resp) => this.computer.fetchPlayer())
+            } else {
+                return this.computer.fetchPlayer()
+            }            
+        })       
+        .then((resp) => {
+            if (resp === null) {
+                return this.computer.fetchCreatePlayer().then((resp) => this.human.stats.newGameCreateStats(this.human))
+            } else {
+                return this.human.stats.newGameCreateStats(this.human)
+            }            
+        }).then((resp) => this.computer.stats.newGameCreateStats(this.computer))        
         
         this.buildTable()
         this.phaseOneHuman() 
@@ -404,6 +416,12 @@ class Player {
 
     fetchPlayer() {
         console.log("fetching player")
+
+        return fetch(`http://localhost:3000/players/${this.id}`).then((resp) => resp.json()).then((json) => json)
+        
+    }
+
+    fetchCreatePlayer() {
         const configurationObject = {
             method: "POST",
             headers: {
@@ -441,14 +459,16 @@ class Statistics {
               "Accept": "application/json"
             },
             body: JSON.stringify(player)
-          }
+        }
 
-        return fetch('http://localhost:3000/statistics', configurationObject).then(function(response) {
+        let newStats = fetch('http://localhost:3000/statistics', configurationObject).then((response) => {
             return response.json();
-        }).then(function(json){
+        }).then((json) => {
             console.log(json)
             return json 
         })
+        player.stats.id = newStats.id 
+        return newStats 
     }
     
     updateStats(player) {

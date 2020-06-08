@@ -21,7 +21,7 @@ class StatisticsController < ApplicationController
     end 
 
     def update
-        stats = Statistic.find_by(name: params["id"])     
+        stats = Statistic.find_by(id: params["id"])     
 
         stats.win_count = params["stats"]["wins"]
         stats.loss_count = params["stats"]["losses"]

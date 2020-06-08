@@ -1,20 +1,19 @@
 class PlayersController < ApplicationController
-    def create         
-        player = Player.find_by(name: params["id"])
-
-        if !!player 
-            render json: player
-        else             
-            player = Player.new
-            player.name = params["id"]
+    def create               
+        player = Player.new
+        player.name = params["id"]
             
-            if player.save 
-                render json: player      
-            else 
-                render json: player.errors 
-            end 
+        if player.save 
+            render json: player      
+        else 
+            render json: player.errors 
         end     
     end
+
+    def show 
+        player = Player.find_by(name: params["id"])
+        render json: player
+    end 
 
     
 end
