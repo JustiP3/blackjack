@@ -102,9 +102,7 @@ class Game {
         this.deck = new Deck() 
     }
 
-    newGame() {
-        this.gameWindow = this.displayGameWindow()
-
+    newGame() {   
         this.human.fetchPlayer().then((resp) => {
             if (resp === null) {
                 return this.human.fetchCreatePlayer().then((resp) => this.computer.fetchPlayer())
@@ -123,6 +121,8 @@ class Game {
             return this.computer.stats.newGameCreateStats(this.computer)
         }).then((resp) => this.computer.stats.id = resp.id)
         
+        this.gameWindow = this.displayGameWindow()
+
         this.buildTable()
         this.phaseOneHuman() 
     }
@@ -546,16 +546,18 @@ class Statistics {
 class Deck {
     dealCard(player) {
         let i = 0 
-        const availableCardsIndicies = this.allCards.map(function(card) {      
-            i++      
+        let availableCardsIndicies = []
+
+        this.allCards.forEach(function(card) {      
             if (card.available === true) {
-                return i-1
-            }          
+                availableCardsIndicies.push(i)
+            }     
+            i++      
         })
         
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
         debugger 
-        // Line below index.js:557 Uncaught TypeError: Cannot set property 'available' of undefined
+     
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
         player.currentHand.push(this.allCards[cardIndex])
     }
