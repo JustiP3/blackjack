@@ -118,7 +118,10 @@ class Game {
             } else {
                 return this.human.stats.newGameCreateStats(this.human)
             }            
-        }).then((resp) => this.computer.stats.newGameCreateStats(this.computer))        
+        }).then((resp) => {
+            this.human.stats.id = resp.id 
+            return this.computer.stats.newGameCreateStats(this.computer)
+        }).then((resp) => this.computer.stats.id = resp.id)
         
         this.buildTable()
         this.phaseOneHuman() 
@@ -274,6 +277,7 @@ class Game {
         }
         
         // UPDATE BACKEND STATS 
+        debugger 
         this.human.stats.updateStats(this.human).then(() => this.computer.stats.updateStats(this.computer))        
 
         if (winner === this.human) {
@@ -461,14 +465,12 @@ class Statistics {
             body: JSON.stringify(player)
         }
 
-        let newStats = fetch('http://localhost:3000/statistics', configurationObject).then((response) => {
+        return fetch('http://localhost:3000/statistics', configurationObject).then((response) => {
             return response.json();
         }).then((json) => {
             console.log(json)
             return json 
-        })
-        player.stats.id = newStats.id 
-        return newStats 
+        })       
     }
     
     updateStats(player) {
@@ -481,10 +483,11 @@ class Statistics {
             body: JSON.stringify(player)
           }
 
-        return fetch(`http://localhost:3000/statistics/${player.id}`, configurationObject).then(function(response) {
+        return fetch(`http://localhost:3000/statistics/${player.stats.id}`, configurationObject).then(function(response) {
             return response.json();
-        }).then(function(json){          
-           return console.log(json)
+        }).then(function(json){  
+            console.log('update stats' + json)        
+            return json 
         })
     }
     
