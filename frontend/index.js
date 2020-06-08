@@ -511,29 +511,36 @@ class Statistics {
                 }                
             }
 
-           const totalHumanData = reduceStatsArrayToTotal(humanData)
-           const totalComputerData = reduceStatsArrayToTotal(computerData)
+           const totalHumanData = Statistics.reduceStatsArrayToTotal(humanData)
+           const totalComputerData = Statistics.reduceStatsArrayToTotal(computerData)
 
             Statistics.buildPlayerStatsContainer(statsWindow, totalHumanData)
             Statistics.buildPlayerStatsContainer(statsWindow, totalComputerData)
         })
     }
 
-    static buildPlayerStatsContainer(container, jsonArray) {
+    static buildPlayerStatsContainer(container, totalObj) {
         const playerStatsContainer = document.createElement('div')
         playerStatsContainer.setAttribute('class', 'stats-container')
 
-        const statId = document.createElement('h1')
+        const playerId = document.createElement('h1')
         const winCount = document.createElement('p')
         const lossCount = document.createElement('p')
         const bustCount = document.createElement('p')
         
-        statId.innerText = `stat id is ${json.id}`
-        winCount.innerText = `Win Count: ${json.win_count}`
-        lossCount.innerText = `Loss Count: ${json.loss_count}`
-        bustCount.innerText = `Bust Count: ${json.bust_count}`
+        if (totalObj.playerId === 1) {
+            playerId.innerText = `Human Stats`
+        } else if (totalObj.playerId === 2) {
+            playerId.innerText = `Computer Stats`
+        } else {
+            playerId.innerText = `Player ${totalObj.id} Stats`
+        }
+        
+        winCount.innerText = `Win Count: ${totalObj.winCount}`
+        lossCount.innerText = `Loss Count: ${totalObj.lossCount}`
+        bustCount.innerText = `Bust Count: ${totalObj.bustCount}`
 
-        playerStatsContainer.appendChild(statId)
+        playerStatsContainer.appendChild(playerId)
         playerStatsContainer.appendChild(winCount)
         playerStatsContainer.appendChild(lossCount)
         playerStatsContainer.appendChild(bustCount)
@@ -553,7 +560,19 @@ class Statistics {
     }
 
     static reduceStatsArrayToTotal(array) {
-        return array.reduce()
+        let totalObj = {
+            playerId: array[0].player_id,
+            winCount: 0,
+            lossCount: 0,
+            bustCount: 0
+        }
+        array.forEach((element) => {
+            totalObj.winCount += element.win_count
+            totalObj.lossCount += element.loss_count
+            totalObj.bustCount += element.bust_count
+        })
+ 
+        return totalObj
     }
 }
 
