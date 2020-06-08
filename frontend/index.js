@@ -554,6 +554,8 @@ class Deck {
         })
         
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
+        debugger 
+        // Line below index.js:557 Uncaught TypeError: Cannot set property 'available' of undefined
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
         player.currentHand.push(this.allCards[cardIndex])
     }

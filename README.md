@@ -9,14 +9,28 @@ DISPLAY
 -(optional) - show recent games 
 
 
-evaluatepoints will not work right now if a user has more than one ace
-
-
 garbage collection question
 -if i remove buttons every round and replace them will i be recreating buttons?
 -does remove() from the DOM remove that variable from memory?
 
 
+#<ActiveRecord::StatementInvalid: SQLite3::BusyException: database is locked>
+ - SQLLite3 was not designed for concurrent db acess 
+ - fixed with asynchronous function calls
+
+
+ Statistics are not being updated at the end of a round 
+ -I think I am passing the wrong ID to update statistics
+ -Needs to be id of this game's player statistics not the id of the player 
+
+ ***TODO***
+-Display stats in a useful way 
+-Make display look nicer
+-at beginning of round display a placehold card in dealer's hand
+-fix open issues
+-if user goes over 21, do not allow them to continue getting cards (BUST!)
+
+***OPEN ISSUES***
 when playing through the game loop multiple times
 -index.js:525 Uncaught TypeError: Cannot set property 'available' of undefined
     at Deck.dealCard (index.js:525)
@@ -25,13 +39,4 @@ when playing through the game loop multiple times
     at Game.phaseOneHuman (index.js:118)
     at HTMLButtonElement.<anonymous> (index.js:376)
 
-
-#<ActiveRecord::StatementInvalid: SQLite3::BusyException: database is locked>
- - SQLLite3 was not designed for concurrent db acess 
- - fixed with asynchronous function calls
-
-***OPEN ISSUES***
- Statistics are not being updated at the end of a round 
- -I think I am passing the wrong ID to update statistics
- -Needs to be id of this game's player statistics not the id of the player 
-
+-evaluatepoints will not work right now if a user has more than one ace
