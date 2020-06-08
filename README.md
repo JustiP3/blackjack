@@ -39,6 +39,7 @@ garbage collection question
 -fix open issues
 -if user goes over 21, do not allow them to continue getting cards (BUST!)
 
+
 ***OPEN ISSUES***
 
 

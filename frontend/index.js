@@ -438,7 +438,6 @@ class Player {
         return fetch('http://localhost:3000/players', configurationObject).then(function(response) {
             return response.json();
         }).then(function(json){
-            console.log(json)
             return json 
         })
     }
@@ -468,7 +467,6 @@ class Statistics {
         return fetch('http://localhost:3000/statistics', configurationObject).then((response) => {
             return response.json();
         }).then((json) => {
-            console.log(json)
             return json 
         })       
     }
@@ -485,8 +483,7 @@ class Statistics {
 
         return fetch(`http://localhost:3000/statistics/${player.stats.id}`, configurationObject).then(function(response) {
             return response.json();
-        }).then(function(json){  
-            console.log('update stats' + json)        
+        }).then(function(json){      
             return json 
         })
     }
@@ -501,15 +498,28 @@ class Statistics {
         fetch("http://localhost:3000/statistics").then(function(response) {
             return response.json();
         }).then(function(json){
-
+            let humanData = []
+            let computerData = []
             for (let i = 0; i < json.length; i++) {
-                Statistics.buildPlayerStatsContainer(statsWindow, json[i])
+            
+                if (json[i].player_id === 1) {
+                    humanData.push(json[i])
+                } else if (json[i].player_id === 2){
+                    computerData.push(json[i])
+                } else {
+                    console.log("unexpected player id in static fetchStats")
+                }                
             }
 
+           const totalHumanData = reduceStatsArrayToTotal(humanData)
+           const totalComputerData = reduceStatsArrayToTotal(computerData)
+
+            Statistics.buildPlayerStatsContainer(statsWindow, totalHumanData)
+            Statistics.buildPlayerStatsContainer(statsWindow, totalComputerData)
         })
     }
 
-    static buildPlayerStatsContainer(container, json) {
+    static buildPlayerStatsContainer(container, jsonArray) {
         const playerStatsContainer = document.createElement('div')
         playerStatsContainer.setAttribute('class', 'stats-container')
 
@@ -540,6 +550,10 @@ class Statistics {
         this.fetchStats(statsWindow)
 
         wrapper.appendChild(statsWindow)
+    }
+
+    static reduceStatsArrayToTotal(array) {
+        return array.reduce()
     }
 }
 
