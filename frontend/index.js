@@ -32,10 +32,14 @@ class AppController {
 
     static clearWrapperContent() {       
         const wrapper = document.getElementsByClassName('wrapper')[0]
-        const content = wrapper.getElementsByTagName('div')          
+        const divContent = wrapper.getElementsByTagName('div')   
+        const buttonContent = wrapper.getElementsByTagName('button')         
 
-        while (content.length !== 0) {
-            content[0].parentNode.removeChild(content[0])
+        while (divContent.length !== 0) {
+            divContent[0].parentNode.removeChild(divContent[0])
+        }
+        while (buttonContent.length !== 0) {
+            buttonContent[0].parentNode.removeChild(buttonContent[0])
         }
     }
 
@@ -45,7 +49,7 @@ class AppController {
         const wrapper = document.getElementsByClassName('wrapper')[0]
 
         const createHomeButton = function() {
-            const homeScreen = document.createElement('div')
+            const homeScreen = document.createElement('button')
             homeScreen.setAttribute('class', 'button')
             homeScreen.innerText = "Home"
             wrapper.appendChild(homeScreen)
@@ -56,7 +60,7 @@ class AppController {
             })
         }
         const createNewGameButton = function() {
-            const newGameDiv = document.createElement('div')
+            const newGameDiv = document.createElement('button')
             newGameDiv.setAttribute('class', 'button')
             newGameDiv.innerText = "New Game"
             wrapper.appendChild(newGameDiv)
@@ -67,7 +71,7 @@ class AppController {
             })
         }
         const createStatsButton = function() {
-            const viewStatsDiv = document.createElement('div')
+            const viewStatsDiv = document.createElement('button')
             viewStatsDiv.setAttribute('class', 'button')
             viewStatsDiv.innerText = "View Statistics"
             wrapper.appendChild(viewStatsDiv)
