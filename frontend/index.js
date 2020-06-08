@@ -223,17 +223,60 @@ class Game {
             }
         }, 0)
 
+        // ACES can count as 11 or 1. 
+        // Player can have up to 4 aces
+
+        const aces = player.currentHand.filter((x) => x.value === "Ace")
+
         if (!!player.currentHand.find(x => x.value === "Ace") && pointsAHigh > 21) {
-            const pointsALow = pointsAHigh - 10 
+            let pointsALow
+            if (aces.length === 1) {
+
+                pointsALow = pointsAHigh - 10 
+
+            } else if (aces.length === 2) {
+
+                if (pointsAHigh - 10 > 21) {
+                    pointsALow = pointsAHigh - 20
+                } else {
+                    pointsALow = pointsAHigh - 10 
+                }
+
+            } else if (aces.length === 3) {
+
+                if (pointsAHigh - 20 > 21) {
+                    pointsALow = pointsAHigh - 30 
+                } else if (pointsAHigh - 10 > 21) {
+                    pointsALow = pointsAHigh - 20
+                } else {
+                    pointsALow = pointsAHigh - 10 
+                }
+
+            } else if (aces.length === 4) {
+
+                if (pointsAHigh - 30 > 21) {
+                    pointsALow = pointsAHigh - 40 
+                } else if (pointsAHigh - 20 > 21) {
+                    pointsALow = pointsAHigh - 30
+                } else if (pointsAHight - 10 > 21) {
+                    pointsALow = pointsAHigh - 20 
+                } else {
+                    pointsALow = pointsAHigh - 10
+                }
+            }
             return pointsALow
+        } else {
+            return pointsAHigh
         }
-        return pointsAHigh
+        
     }
 
     evaluateWinnerAndUpdateStats() {
         const humanPoints = this.evaluatePoints(this.human)
         const computerPoints = this.evaluatePoints(this.computer)
         let winner = null 
+        console.log(humanPoints)
+        console.log(computerPoints)
 
         if (humanPoints > computerPoints && humanPoints <= 21) {
             // human wins 

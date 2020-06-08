@@ -32,9 +32,11 @@ garbage collection question
     at HTMLButtonElement.<anonymous> (index.js:376)
     -Should be fixed - will continue to monitor 
 
+    -Display stats in a useful way 
+
  ***TODO***
--Display stats in a useful way 
--Make display look nicer
+
+-Make display look nicer - create a default size for main window 
 -at beginning of round display a placehold card in dealer's hand
 -fix open issues
 -if user goes over 21, do not allow them to continue getting cards (BUST!)
