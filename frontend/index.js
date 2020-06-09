@@ -555,8 +555,8 @@ class Statistics {
                 }                
             }
 
-           const totalHumanData = Statistics.reduceStatsArrayToTotal(humanData)
-           const totalComputerData = Statistics.reduceStatsArrayToTotal(computerData)
+           const totalHumanData = Statistics.reduceStatsArrayToTotal(humanData, 1)
+           const totalComputerData = Statistics.reduceStatsArrayToTotal(computerData, 2)
 
             Statistics.buildPlayerStatsContainer(statsWindow, totalHumanData)
             Statistics.buildPlayerStatsContainer(statsWindow, totalComputerData)
@@ -614,16 +614,15 @@ class Statistics {
         wrapper.appendChild(statsWindow)
     }
 
-    static reduceStatsArrayToTotal(array) {
+    static reduceStatsArrayToTotal(array, id) {
         let totalObj = {
+            playerId: id,
             winCount: 0,
             lossCount: 0,
             bustCount: 0
         }
 
         if (array.length > 0) {
-            totalObj.playerId = array[0].player_id
-
             array.forEach((element) => {
                 totalObj.winCount += element.win_count
                 totalObj.lossCount += element.loss_count
@@ -631,7 +630,7 @@ class Statistics {
             })
         }
         
-    return totalObj
+        return totalObj
     }
 
     static resetStatsEventListener() {
