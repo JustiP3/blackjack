@@ -35,7 +35,10 @@ class StatisticsController < ApplicationController
     end 
 
     def destroy 
-        a = Statistic.where("player_id = #{params["id"]}")
-        render json: a
+        user_stats = Statistic.where("player_id = #{params["id"]}")
+        user_stats.each do |stat|
+            Statistic.destroy(stat.id)
+        end 
+        render json: user_stats
     end 
 end

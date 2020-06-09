@@ -616,19 +616,24 @@ class Statistics {
 
     static reduceStatsArrayToTotal(array) {
         let totalObj = {
-            playerId: array[0].player_id,
             winCount: 0,
             lossCount: 0,
             bustCount: 0
         }
-        array.forEach((element) => {
-            totalObj.winCount += element.win_count
-            totalObj.lossCount += element.loss_count
-            totalObj.bustCount += element.bust_count
-        })
- 
-        return totalObj
+
+        if (array.length > 0) {
+            totalObj.playerId = array[0].player_id
+
+            array.forEach((element) => {
+                totalObj.winCount += element.win_count
+                totalObj.lossCount += element.loss_count
+                totalObj.bustCount += element.bust_count
+            })
+        }
+        
+    return totalObj
     }
+
     static resetStatsEventListener() {
         const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText
 
