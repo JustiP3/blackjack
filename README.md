@@ -32,17 +32,22 @@ garbage collection question
     at HTMLButtonElement.<anonymous> (index.js:376)
     -Should be fixed - will continue to monitor 
 
-    -Display stats in a useful way 
+    -Display stats in a useful way - done
+    -evaluatepoints will not work right now if a user has more than one ace -fixed 
 
  ***TODO***
 
 -Make display look nicer - create a default size for main window 
 -at beginning of round display a placehold card in dealer's hand
--fix open issues
--if user goes over 21, do not allow them to continue getting cards (BUST!)
+
+-Display running total while player plays
+-if user goes over 21, display "BUST!"
+
+-Narrow available routes list to only routes that are used on the backend 
+
+-give player the option to reset all stats
 
 
 ***OPEN ISSUES***
+-No bugs 
 
-
--evaluatepoints will not work right now if a user has more than one ace

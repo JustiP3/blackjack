@@ -535,9 +535,6 @@ class Statistics {
         })
     }
     
-    
-
-    
 
     // Static Methods 
 
@@ -574,6 +571,9 @@ class Statistics {
         const winCount = document.createElement('p')
         const lossCount = document.createElement('p')
         const bustCount = document.createElement('p')
+        const resetStats = document.createElement('button')
+
+        //resetStats.setAttribute('class', 'button')
         
         if (totalObj.playerId === 1) {
             playerId.innerText = `Human Stats`
@@ -586,11 +586,13 @@ class Statistics {
         winCount.innerText = `Win Count: ${totalObj.winCount}`
         lossCount.innerText = `Loss Count: ${totalObj.lossCount}`
         bustCount.innerText = `Bust Count: ${totalObj.bustCount}`
+        resetStats.innerText = 'Reset Player Stats'
 
         playerStatsContainer.appendChild(playerId)
         playerStatsContainer.appendChild(winCount)
         playerStatsContainer.appendChild(lossCount)
         playerStatsContainer.appendChild(bustCount)
+        playerStatsContainer.appendChild(resetStats)
 
         container.appendChild(playerStatsContainer)
     }
