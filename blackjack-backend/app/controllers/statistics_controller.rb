@@ -33,4 +33,9 @@ class StatisticsController < ApplicationController
             render json: stats.errors
         end
     end 
+
+    def destroy 
+        a = Statistic.where("player_id = #{params["id"]}")
+        render json: a
+    end 
 end

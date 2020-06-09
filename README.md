@@ -49,5 +49,8 @@ garbage collection question
 
 
 ***OPEN ISSUES***
--No bugs 
+
+-Reset Statistics is not using RESTFUL routes 
+-I want to delete all statistics associated with a player (player has many statistics)
+-currently the route is delete /statistics/:player_id, i use player_id to find all statistics associated and delete each 
 

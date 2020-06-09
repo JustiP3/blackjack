@@ -567,20 +567,25 @@ class Statistics {
         const playerStatsContainer = document.createElement('div')
         playerStatsContainer.setAttribute('class', 'stats-container')
 
-        const playerId = document.createElement('h1')
+        const playerName = document.createElement('h1')
         const winCount = document.createElement('p')
         const lossCount = document.createElement('p')
         const bustCount = document.createElement('p')
         const resetStats = document.createElement('button')
+        const hiddenPlayerId = document.createElement('p')
 
-        //resetStats.setAttribute('class', 'button')
+        hiddenPlayerId.setAttribute('hidden', 'true')
+        hiddenPlayerId.setAttribute('class', 'hidden-player-id')
+        hiddenPlayerId.innerText = `${totalObj.playerId}`
+
+        resetStats.addEventListener('click', Statistics.resetStatsEventListener)
         
         if (totalObj.playerId === 1) {
-            playerId.innerText = `Human Stats`
+            playerName.innerText = `Human Stats`
         } else if (totalObj.playerId === 2) {
-            playerId.innerText = `Computer Stats`
+            playerName.innerText = `Computer Stats`
         } else {
-            playerId.innerText = `Player ${totalObj.id} Stats`
+            playerName.innerText = `Player ${totalObj.id} Stats`
         }
         
         winCount.innerText = `Win Count: ${totalObj.winCount}`
@@ -588,11 +593,12 @@ class Statistics {
         bustCount.innerText = `Bust Count: ${totalObj.bustCount}`
         resetStats.innerText = 'Reset Player Stats'
 
-        playerStatsContainer.appendChild(playerId)
+        playerStatsContainer.appendChild(playerName)
         playerStatsContainer.appendChild(winCount)
         playerStatsContainer.appendChild(lossCount)
         playerStatsContainer.appendChild(bustCount)
         playerStatsContainer.appendChild(resetStats)
+        playerStatsContainer.appendChild(hiddenPlayerId)
 
         container.appendChild(playerStatsContainer)
     }
@@ -622,6 +628,25 @@ class Statistics {
         })
  
         return totalObj
+    }
+    static resetStatsEventListener() {
+        const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText
+
+        const configurationObject = {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            }
+        }
+
+        return fetch(`http://localhost:3000/statistics/${playerId}`, configurationObject).then(function(response) {
+            return response.json();
+        }).then(function(json){   
+            console.log(json)   
+            return json 
+        })
+
     }
 }
 
