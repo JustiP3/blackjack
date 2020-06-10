@@ -646,8 +646,9 @@ class Statistics {
 
         return fetch(`http://localhost:3000/statistics/${playerId}`, configurationObject).then(function(response) {
             return response.json();
-        }).then(function(json){   
-            console.log(json)   
+        }).then(function(json){  
+            AppController.clearWrapperContent()
+            AppController.displayStatistics()  
             return json 
         })
 
@@ -658,14 +659,13 @@ class Deck {
     dealCard(player) {
         let i = 0 
         let availableCardsIndicies = []
-
         this.allCards.forEach(function(card) {      
             if (card.available === true) {
                 availableCardsIndicies.push(i)
             }     
             i++      
-        })
-        
+        })    
+    
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
      
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
