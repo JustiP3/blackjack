@@ -38,9 +38,11 @@ garbage collection question
     -Display running total while player plays
 -if user goes over 21, display "BUST!"  - DONE 
 
+-Make display look nicer - create a default size for main window  - DONE 
+
  ***TODO***
 
--Make display look nicer - create a default size for main window 
+
 -at beginning of round display a placehold card in dealer's hand
 
 -Narrow available routes list to only routes that are used on the backend 
