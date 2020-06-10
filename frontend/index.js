@@ -464,6 +464,7 @@ class Game {
 
         this.buttonsContainer.appendChild(dealAgain)
         this.buttonsContainer.appendChild(quitGame)
+        debugger 
     }
 
     buildTable() {
@@ -696,7 +697,7 @@ class Deck {
         const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
      
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
-        player.currentHand.push(this.allCards[cardIndex])
+        player.currentHand.push(this.allCards[availableCardsIndicies[cardIndex]])
     }
 
     newRound(player1, player2) {        
