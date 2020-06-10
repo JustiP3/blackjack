@@ -441,14 +441,20 @@ class Game {
     buildTable() {
         this.computerCardsContainer = document.createElement('div')
         this.humanCardsContainer = document.createElement('div')    
-        this.buttonsContainer = document.createElement('div')    
+        this.buttonsContainer = document.createElement('div')   
+        this.humanScoreCard = document.createElement('div')
+        this.computerScoreCard = document.createElement('div') 
 
         this.computerCardsContainer.setAttribute('class', 'player-hand-container')
         this.humanCardsContainer.setAttribute('class', 'player-hand-container')  
         this.buttonsContainer.setAttribute('class', 'player-controls') 
+        this.humanScoreCard.setAttribute('class', 'score-card')
+        this.computerScoreCard.setAttribute('class', 'score-card')
 
         this.gameWindow.appendChild(this.computerCardsContainer)
+        this.gameWindow.appendChild(this.computerScoreCard)
         this.gameWindow.appendChild(this.humanCardsContainer)
+        this.gameWindow.appendChild(this.humanScoreCard)
         this.gameWindow.appendChild(this.buttonsContainer)      
     }
 }
