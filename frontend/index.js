@@ -361,12 +361,16 @@ class Game {
         }
         while (this.buttonsContainer.childNodes.length > 0) {
             this.buttonsContainer.childNodes[0].remove()
-        }
-           
-        this.displayUpdateScoreCards()
+        }     
 
+        const placeholder = document.createElement('div')
+        placeholder.setAttribute('class', 'placeholder')
+        placeholder.innerText = " \n \n "
+        this.computerCardsContainer.appendChild(placeholder)
+
+        this.displayUpdateScoreCards()
         this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
-        this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)              
+        this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)            
     }
 
     displayUpdatePlayerHand(playerDiv, player) {
