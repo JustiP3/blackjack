@@ -9,6 +9,11 @@ body {
     color: red;
   }
 
+  table {
+    display: inline-block;
+    background-color: white;
+  }
+
   .wrapper {
     display: inline-block;    
     width: 100%;

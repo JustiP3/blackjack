@@ -690,23 +690,47 @@ class Statistics {
 
         const generateTable = function (table, data) {
             for (let element of data) {
-                let row = table.insertRow();
-                for (const key in element) {
-                    let cell = row.insertCell();
-                    let text = document.createTextNode(element[key]);
-                    cell.appendChild(text);
-                }
+                const row = table.insertRow()
+
+                const idCell = row.insertCell()
+                const winCell = row.insertCell()
+                const lossCell = row.insertCell()
+                const bustCell = row.insertCell()
+
+                const idText = document.createTextNode(element['id'])
+                const winText = document.createTextNode(element['win_count'])
+                const lossText = document.createTextNode(element['loss_count'])
+                const bustText = document.createTextNode(element['bust_count'])
+                
+                idCell.appendChild(idText)
+                winCell.appendChild(winText)
+                lossCell.appendChild(lossText)
+                bustCell.appendChild(bustText)
             }
         }
-        const generateTableHead = function(table, data) {
-            let thead = table.createTHead();
-            let row = thead.insertRow();
-            for (let key of data) {
-                let th = document.createElement("th");
-                let text = document.createTextNode(key);
-                th.appendChild(text);
-                row.appendChild(th);
-            }
+        const generateTableHead = function(table) {
+            const thead = table.createTHead();
+            const row = thead.insertRow();
+
+            const gameIdTh = document.createElement('th')
+            const winTh = document.createElement('th')
+            const lossTh = document.createElement('th')
+            const bustTh = document.createElement('th')
+
+            const gameIdText = document.createTextNode('Game ID')
+            const winText = document.createTextNode('Wins') 
+            const lossText = document.createTextNode('Losses')
+            const bustText = document.createTextNode('Bust Count')
+
+            gameIdTh.appendChild(gameIdText)
+            winTh.appendChild(winText)
+            lossTh.appendChild(lossText)
+            bustTh.appendChild(bustText)
+
+            row.appendChild(gameIdTh)
+            row.appendChild(winTh)
+            row.appendChild(lossTh)
+            row.appendChild(bustTh)
         }
 
         return fetch(`http://localhost:3000/players/${playerId}/statistics`).then(function(response) {
@@ -716,7 +740,7 @@ class Statistics {
                 content[0].remove()
             }
             generateTable(detailsTable, json)
-            generateTableHead(detailsTable, Object.keys(json[0]))
+            generateTableHead(detailsTable)
             mainWindow.appendChild(detailsTable)
             return json 
         })
