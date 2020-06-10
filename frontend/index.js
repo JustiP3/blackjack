@@ -168,6 +168,9 @@ class Game {
             }  
         }
 
+        const placeholder = document.getElementsByClassName('placeholder')[0]
+        placeholder.remove()
+
         this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
                    
     }
