@@ -58,7 +58,8 @@ body {
 
   .score-card {
     background-color: white;
-    display: inline-block;
+    display: block;
     margin: 10px; 
     border-style: solid;
+    width: 80%;
   }

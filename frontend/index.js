@@ -140,7 +140,8 @@ class Game {
     }
 
     phaseTwoComputer() {
-        this.computerTurn()        
+        this.computerTurn()   
+        this.updateScoreCards()     
         this.roundComplete()         
     }
 
@@ -361,8 +362,8 @@ class Game {
         while (this.buttonsContainer.childNodes.length > 0) {
             this.buttonsContainer.childNodes[0].remove()
         }
-        
-
+           
+        this.updateScoreCards()
 
         this.displayUpdatePlayerHand(this.computerCardsContainer, this.computer)
         this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)              
@@ -375,6 +376,25 @@ class Game {
             const card = this.buildCard(player.currentHand[i])
             playerDiv.appendChild(card) 
         }
+    }
+
+    updateScoreCards() {
+        const humanPoints = this.evaluatePoints(this.human)
+        const computerPoints = this.evaluatePoints(this.computer)
+
+        if (humanPoints > 21) {
+            this.humanScoreCard.innerText = 'Human Score: BUST!'
+        } else {
+            this.humanScoreCard.innerText = `Human Score: ${this.evaluatePoints(this.human)}`
+        }
+        
+        if (computerPoints > 21) {
+            this.computerScoreCard.innerText = 'Computer Score: BUST!' 
+        } else {
+            this.computerScoreCard.innerText = `Computer Score: ${this.evaluatePoints(this.computer)}` 
+        }
+        
+        
     }
 
     buildCard(cardObject) {
@@ -397,6 +417,7 @@ class Game {
 
         hitButton.addEventListener('click', () => {
             this.deck.dealCard(this.human)
+            this.updateScoreCards()
             this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
         })
         stayButton.addEventListener('click', () => {
