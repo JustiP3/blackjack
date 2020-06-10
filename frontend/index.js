@@ -718,7 +718,6 @@ class Statistics {
             generateTable(detailsTable, json)
             generateTableHead(detailsTable, Object.keys(json[0]))
             mainWindow.appendChild(detailsTable)
-            debugger 
             return json 
         })
     }

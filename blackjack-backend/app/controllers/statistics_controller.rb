@@ -1,6 +1,12 @@
 class StatisticsController < ApplicationController
     def index 
-        all_statistics = Statistic.all 
+        
+        if !!params["player_id"]
+            all_statistics = Statistic.where("player_id = #{params["player_id"]}")
+        else 
+            all_statistics = Statistic.all 
+        end    
+         
         render json: all_statistics.to_json
     end 
 
