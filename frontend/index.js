@@ -275,8 +275,6 @@ class Game {
         const humanPoints = this.evaluatePoints(this.human)
         const computerPoints = this.evaluatePoints(this.computer)
         let winner = null 
-        console.log(humanPoints)
-        console.log(computerPoints)
 
         if (humanPoints > computerPoints && humanPoints <= 21) {
             // human wins 
@@ -398,12 +396,10 @@ class Game {
         stayButton.innerText = "Stay"
 
         hitButton.addEventListener('click', () => {
-            console.log('hit me')
             this.deck.dealCard(this.human)
             this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
         })
         stayButton.addEventListener('click', () => {
-            console.log('stay')
             this.phaseTwoComputer()
         })
 
@@ -466,10 +462,7 @@ class Player {
     }
 
     fetchPlayer() {
-        console.log("fetching player")
-
-        return fetch(`http://localhost:3000/players/${this.id}`).then((resp) => resp.json()).then((json) => json)
-        
+        return fetch(`http://localhost:3000/players/${this.id}`).then((resp) => resp.json()).then((json) => json)        
     }
 
     fetchCreatePlayer() {
