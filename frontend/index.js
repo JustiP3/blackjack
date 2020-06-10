@@ -684,10 +684,40 @@ class Statistics {
 
     static viewStatsDetailsEventListener() {
         const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText
+        const mainWindow = document.getElementsByClassName('main-window')[0]
+        const content = mainWindow.childNodes
+        const detailsTable = document.createElement('table')
 
-        return fetch(`http://localhost:3000/${playerId}/statistics`).then(function(response) {
+        const generateTable = function (table, data) {
+            for (let element of data) {
+                let row = table.insertRow();
+                for (const key in element) {
+                    let cell = row.insertCell();
+                    let text = document.createTextNode(element[key]);
+                    cell.appendChild(text);
+                }
+            }
+        }
+        const generateTableHead = function(table, data) {
+            let thead = table.createTHead();
+            let row = thead.insertRow();
+            for (let key of data) {
+                let th = document.createElement("th");
+                let text = document.createTextNode(key);
+                th.appendChild(text);
+                row.appendChild(th);
+            }
+        }
+
+        return fetch(`http://localhost:3000/players/${playerId}/statistics`).then(function(response) {
             return response.json();
         }).then(function(json){  
+            while (content.length > 0) {
+                content[0].remove()
+            }
+            generateTable(detailsTable, json)
+            generateTableHead(detailsTable, Object.keys(json[0]))
+            mainWindow.appendChild(detailsTable)
             debugger 
             return json 
         })
