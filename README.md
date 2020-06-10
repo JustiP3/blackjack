@@ -50,6 +50,13 @@ garbage collection question
 
 ***OPEN ISSUES***
 
+
+-Revise display stats to use nested routes 
+/players/1/statistics - index of games for this player 
+/players/2/statistics 
+
+-add button to delete each game 
+-display totals at the top of screen then all games in descending order (newest to oldest)
 -Reset Statistics is not using RESTFUL routes 
 -I want to delete all statistics associated with a player (player has many statistics)
 -currently the route is delete /statistics/:player_id, i use player_id to find all statistics associated and delete each 
