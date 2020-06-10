@@ -49,6 +49,7 @@ player.currentHand.push(this.allCards[availableCardsIndicies[cardIndex]])
 
  ***TODO***
 
+-Change stat display page 
 -STATS - make restful routes
 -STATS - add nested routes /players/1/statistics - index of games for this player 
 -STATS - add nested routes - -add delete button to each game 
