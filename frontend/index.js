@@ -731,7 +731,6 @@ class Statistics {
         buttonContainer.setAttribute('class', 'player-controls')  
         buttonContainer.appendChild(backButton)
 
-
         const generateTable = function (table, data) {
             for (let element of data) {
                 const row = table.insertRow()
@@ -1088,5 +1087,4 @@ class Deck {
             available: true 
         }       
     ]
-
 }
