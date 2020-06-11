@@ -684,21 +684,14 @@ class Statistics {
 
     }
 
-    static viewStatsDetailsEventListener() {
-        
-        const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText            
-        const content = mainWindow.childNodes
-        
-
-        
+    static viewStatsDetailsEventListener() {    
+        const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText          
 
         return fetch(`http://localhost:3000/players/${playerId}/statistics`).then(function(response) {
             return response.json();
         }).then(function(json){  
-            while (content.length > 0) {
-                content[0].remove()
-            }
-            Statistics.generateDetailsTable()
+            
+            Statistics.generateDetailsTable(json)
             return json 
         })
     }
@@ -706,6 +699,7 @@ class Statistics {
     static generateDetailsTable(json) {
         const mainWindow = document.getElementsByClassName('main-window')[0]
         const detailsTable = document.createElement('table')
+        const content = mainWindow.childNodes
 
         const generateTable = function (table, data) {
             for (let element of data) {
@@ -760,6 +754,10 @@ class Statistics {
             row.appendChild(lossTh)
             row.appendChild(bustTh)
             row.appendChild(deleteTh)
+        }
+
+        while (content.length > 0) {
+            content[0].remove()
         }
 
         generateTable(detailsTable, json)
