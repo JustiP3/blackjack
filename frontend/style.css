@@ -12,6 +12,11 @@ body {
   table {
     display: inline-block;
     background-color: white;
+    padding: 10px;
+  }
+
+  td { 
+    padding: 5px;
   }
 
   .wrapper {
@@ -44,6 +49,7 @@ body {
     background-color: white;
     display: inline-block;
     margin: 10px; 
+    padding: 10px;
   }
 
   .player-hand-container {
@@ -64,8 +70,16 @@ body {
     margin: 10px; 
     height: 100px;
     width: 75px;
-    border-style: solid;
-   
+    border-style: solid;   
+  }
+
+  .red-card {
+    border-color: black;
+    color: red;
+  }
+
+  .black-card {
+    color: black;
   }
 
   .placeholder {
