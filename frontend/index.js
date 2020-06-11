@@ -661,11 +661,9 @@ class Statistics {
         return totalObj
     }
 
-    static resetStatsEventListener() {
+    static deleteStatsEventListener() {
         const tableRow = this.parentElement.parentElement
         const gameId = tableRow.childNodes[0].innerText
-
-        debugger 
 
         const configurationObject = {
             method: "DELETE",
@@ -678,17 +676,35 @@ class Statistics {
         return fetch(`http://localhost:3000/statistics/${gameId}`, configurationObject).then(function(response) {
             return response.json();
         }).then(function(json){  
-            AppController.clearWrapperContent()
-            AppController.displayStatistics()  
+            const remainingStats = json
+
+            Statistics.generateDetailsTable(remainingStats)
             return json 
         })
 
     }
 
     static viewStatsDetailsEventListener() {
-        const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText
-        const mainWindow = document.getElementsByClassName('main-window')[0]
+        
+        const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText            
         const content = mainWindow.childNodes
+        
+
+        
+
+        return fetch(`http://localhost:3000/players/${playerId}/statistics`).then(function(response) {
+            return response.json();
+        }).then(function(json){  
+            while (content.length > 0) {
+                content[0].remove()
+            }
+            Statistics.generateDetailsTable()
+            return json 
+        })
+    }
+
+    static generateDetailsTable(json) {
+        const mainWindow = document.getElementsByClassName('main-window')[0]
         const detailsTable = document.createElement('table')
 
         const generateTable = function (table, data) {
@@ -708,7 +724,7 @@ class Statistics {
                 const deleteButton = document.createElement('button')
                 
                 deleteButton.innerText = "Delete"                  
-                deleteButton.addEventListener('click', Statistics.resetStatsEventListener)
+                deleteButton.addEventListener('click', Statistics.deleteStatsEventListener)
                 
                 idCell.appendChild(idText)
                 winCell.appendChild(winText)
@@ -746,17 +762,9 @@ class Statistics {
             row.appendChild(deleteTh)
         }
 
-        return fetch(`http://localhost:3000/players/${playerId}/statistics`).then(function(response) {
-            return response.json();
-        }).then(function(json){  
-            while (content.length > 0) {
-                content[0].remove()
-            }
-            generateTable(detailsTable, json)
-            generateTableHead(detailsTable)
-            mainWindow.appendChild(detailsTable)
-            return json 
-        })
+        generateTable(detailsTable, json)
+        generateTableHead(detailsTable)
+        mainWindow.appendChild(detailsTable)
     }
 }
 

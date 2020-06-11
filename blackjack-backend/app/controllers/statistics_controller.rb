@@ -42,8 +42,10 @@ class StatisticsController < ApplicationController
 
     def destroy 
         statistic = Statistic.find_by(id: params["id"])
-
         statistic.destroy
-        render json: statistic 
+
+        stats_remaining = Statistic.where("player_id = #{params["player_id"]}")
+        
+        render json: stats_remaining
     end 
 end
