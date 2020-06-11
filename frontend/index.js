@@ -699,14 +699,18 @@ class Statistics {
 
         const detailsTable = document.createElement('table')
         const backButton = document.createElement('button')
+        const buttonContainer = document.createElement('div')
 
         backButton.innerText = "Go Back"
         backButton.setAttribute('class', 'button')
-        
         backButton.addEventListener('click', function() {
             AppController.clearWrapperContent()
             AppController.displayStatistics()
         })
+
+        buttonContainer.setAttribute('class', 'player-controls')  
+        buttonContainer.appendChild(backButton)
+
 
         const generateTable = function (table, data) {
             for (let element of data) {
@@ -769,7 +773,7 @@ class Statistics {
 
         generateTable(detailsTable, json)
         generateTableHead(detailsTable)
-        mainWindow.appendChild(backButton)
+        mainWindow.appendChild(buttonContainer)
         mainWindow.appendChild(detailsTable)
     }
 }
