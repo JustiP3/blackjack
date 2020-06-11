@@ -187,8 +187,6 @@ class Game {
         AppController.displayWelcome()
     }
 
-    // Helper Methods (Non-DOM)
-
     evaluatePoints(player) {
         const pointsAHigh = player.currentHand.reduce((acc, cur) => {
             switch(cur.value) {
@@ -464,7 +462,6 @@ class Game {
 
         this.buttonsContainer.appendChild(dealAgain)
         this.buttonsContainer.appendChild(quitGame)
-        debugger 
     }
 
     buildTable() {
@@ -697,9 +694,19 @@ class Statistics {
     }
 
     static generateDetailsTable(json) {
-        const mainWindow = document.getElementsByClassName('main-window')[0]
-        const detailsTable = document.createElement('table')
+        const mainWindow = document.getElementsByClassName('main-window')[0]        
         const content = mainWindow.childNodes
+
+        const detailsTable = document.createElement('table')
+        const backButton = document.createElement('button')
+
+        backButton.innerText = "Go Back"
+        backButton.setAttribute('class', 'button')
+        
+        backButton.addEventListener('click', function() {
+            AppController.clearWrapperContent()
+            AppController.displayStatistics()
+        })
 
         const generateTable = function (table, data) {
             for (let element of data) {
@@ -762,6 +769,7 @@ class Statistics {
 
         generateTable(detailsTable, json)
         generateTableHead(detailsTable)
+        mainWindow.appendChild(backButton)
         mainWindow.appendChild(detailsTable)
     }
 }
@@ -777,7 +785,7 @@ class Deck {
             i++      
         })    
     
-        const cardIndex = Math.floor(Math.random() * Math.floor(availableCardsIndicies.length))
+        const cardIndex = Math.floor(Math.random() * availableCardsIndicies.length)
      
         this.allCards[availableCardsIndicies[cardIndex]].available = false 
         player.currentHand.push(this.allCards[availableCardsIndicies[cardIndex]])
