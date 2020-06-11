@@ -47,13 +47,14 @@ deck dealt me 2 of the same card - king of hearts - something is not working - F
 this.allCards[availableCardsIndicies[cardIndex]].available = false 
 player.currentHand.push(this.allCards[availableCardsIndicies[cardIndex]])
 
+-Change stat display page 
+-STATS - make restful routes - done
+-STATS - add nested routes /players/1/statistics - index of games for this player - done 
+
  ***TODO***
 
--Change stat display page 
--STATS - make restful routes
--STATS - add nested routes /players/1/statistics - index of games for this player 
 -STATS - add nested routes - -add delete button to each game 
--display totals at the top of screen then all games in descending order (newest to oldest)
+
 
 ***OPEN ISSUES***
 

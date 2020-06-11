@@ -662,7 +662,10 @@ class Statistics {
     }
 
     static resetStatsEventListener() {
-        const playerId = this.parentElement.getElementsByClassName('hidden-player-id')[0].innerText
+        const tableRow = this.parentElement.parentElement
+        const gameId = tableRow.childNodes[0].innerText
+
+        debugger 
 
         const configurationObject = {
             method: "DELETE",
@@ -672,7 +675,7 @@ class Statistics {
             }
         }
 
-        return fetch(`http://localhost:3000/statistics/${playerId}`, configurationObject).then(function(response) {
+        return fetch(`http://localhost:3000/statistics/${gameId}`, configurationObject).then(function(response) {
             return response.json();
         }).then(function(json){  
             AppController.clearWrapperContent()
@@ -696,16 +699,22 @@ class Statistics {
                 const winCell = row.insertCell()
                 const lossCell = row.insertCell()
                 const bustCell = row.insertCell()
+                const deleteCell = row.insertCell()
 
                 const idText = document.createTextNode(element['id'])
                 const winText = document.createTextNode(element['win_count'])
                 const lossText = document.createTextNode(element['loss_count'])
                 const bustText = document.createTextNode(element['bust_count'])
+                const deleteButton = document.createElement('button')
+                
+                deleteButton.innerText = "Delete"                  
+                deleteButton.addEventListener('click', Statistics.resetStatsEventListener)
                 
                 idCell.appendChild(idText)
                 winCell.appendChild(winText)
                 lossCell.appendChild(lossText)
                 bustCell.appendChild(bustText)
+                deleteCell.appendChild(deleteButton)
             }
         }
         const generateTableHead = function(table) {
@@ -716,21 +725,25 @@ class Statistics {
             const winTh = document.createElement('th')
             const lossTh = document.createElement('th')
             const bustTh = document.createElement('th')
+            const deleteTh = document.createElement('th')
 
             const gameIdText = document.createTextNode('Game ID')
             const winText = document.createTextNode('Wins') 
             const lossText = document.createTextNode('Losses')
             const bustText = document.createTextNode('Bust Count')
+            const deleteText = document.createTextNode('Delete')
 
             gameIdTh.appendChild(gameIdText)
             winTh.appendChild(winText)
             lossTh.appendChild(lossText)
             bustTh.appendChild(bustText)
+            deleteTh.appendChild(deleteText)
 
             row.appendChild(gameIdTh)
             row.appendChild(winTh)
             row.appendChild(lossTh)
             row.appendChild(bustTh)
+            row.appendChild(deleteTh)
         }
 
         return fetch(`http://localhost:3000/players/${playerId}/statistics`).then(function(response) {
