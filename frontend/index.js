@@ -406,7 +406,27 @@ class Game {
         const card = document.createElement('div')
         card.setAttribute('class', 'card')
         
-        card.innerText = `${cardObject.value} \n ${cardObject.suit}`
+        card.innerText = `${cardObject.value} \n `
+
+        switch (cardObject.suit) {
+            case "Hearts":
+                card.innerHTML += "&hearts;"
+                card.classList.add('red-card')
+                break;
+            case "Diamonds":
+                card.innerHTML += "&diams;"
+                card.classList.add('red-card')
+                break;
+            case "Spades":
+                card.innerHTML += "&spades;"
+                card.classList.add('black-card')
+                break;
+            case "Clubs": 
+                card.innerHTML += "&clubs;"
+                card.classList.add('black-card')
+                break;
+        }
+
         return card 
     }
 
