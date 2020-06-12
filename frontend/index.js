@@ -584,28 +584,20 @@ class Statistics {
     // Static Methods 
 
     static fetchStats(statsWindow) {
-        fetch("http://localhost:3000/statistics").then(function(response) {
+
+        fetch("http://localhost:3000/players/1/statistics").then(function(response) {
             return response.json();
         }).then(function(json){
-            let humanData = []
-            let computerData = []
-            for (let i = 0; i < json.length; i++) {
-            
-                if (json[i].player_id === 1) {
-                    humanData.push(json[i])
-                } else if (json[i].player_id === 2){
-                    computerData.push(json[i])
-                } else {
-                    console.log("unexpected player id in static fetchStats")
-                }                
-            }
-
-           const totalHumanData = Statistics.reduceStatsArrayToTotal(humanData, 1)
-           const totalComputerData = Statistics.reduceStatsArrayToTotal(computerData, 2)
-
+            const totalHumanData = Statistics.reduceStatsArrayToTotal(json, 1)
             Statistics.buildPlayerStatsContainer(statsWindow, totalHumanData)
+            return json 
+        }).then(fetch("http://localhost:3000/players/2/statistics")).then(function(response) {
+            return response.json();
+        }).then(function(json){
+            const totalComputerData = Statistics.reduceStatsArrayToTotal(json, 2)
             Statistics.buildPlayerStatsContainer(statsWindow, totalComputerData)
-        })
+            return json 
+        })      
     }
 
     static buildPlayerStatsContainer(container, totalObj) {
@@ -1087,4 +1079,5 @@ class Deck {
             available: true 
         }       
     ]
+
 }
