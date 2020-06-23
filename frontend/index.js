@@ -592,7 +592,7 @@ class Statistics {
             Statistics.buildPlayerStatsContainer(statsWindow, totalHumanData)
             return json 
         }).then(fetch("http://localhost:3000/players/2/statistics")).then(function(response) {
-            return response.json();
+            return response
         }).then(function(json){
             const totalComputerData = Statistics.reduceStatsArrayToTotal(json, 2)
             Statistics.buildPlayerStatsContainer(statsWindow, totalComputerData)
