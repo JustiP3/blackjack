@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
     AppController.displayWelcome()
-
 })
 
 class AppController {
@@ -444,9 +443,16 @@ class Game {
             this.deck.dealCard(this.human)
             this.displayUpdateScoreCards()
             this.displayUpdatePlayerHand(this.humanCardsContainer, this.human)
+            if (this.evaluatePoints(this.human) > 21) {
+                this.computerTurn()
+                this.displayUpdateScoreCards()     
+                this.roundComplete()  
+            }
         })
+        
+
         stayButton.addEventListener('click', () => {
-            this.phaseTwoComputer()
+            this.phaseTwoComputer()       
         })
 
         this.buttonsContainer.appendChild(hitButton)
@@ -660,10 +666,10 @@ class Statistics {
         }
 
         if (array.length > 0) {
-            array.forEach((element) => {
+            array.forEach((element) => {    
                 totalObj.winCount += element.win_count
                 totalObj.lossCount += element.loss_count
-                totalObj.bustCount += element.bust_count
+                totalObj.bustCount += element.bust_count                
             })
         }
         
